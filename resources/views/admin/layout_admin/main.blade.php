@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,24 +7,29 @@
 </head>
 
 <body id="page-top">
-  <div id="wrapper">
-    <!-- Sidebar -->
-    @include('admin.layout_admin.sidebar')
-    <!-- Sidebar -->
-    <div id="content-wrapper" class="d-flex flex-column">
-      @yield('content')
-      <!-- Footer -->
-      @include('admin.layout_admin.footer')
-      <!-- Footer -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        @include('admin.layout_admin.sidebar')
+        <!-- Sidebar -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                @include('admin.layout_admin.header')
+                @yield('content')
+
+            </div>
+            <!-- Footer -->
+            @include('admin.layout_admin.footer')
+            <!-- Footer -->
+        </div>
     </div>
-  </div>
 
-  <!-- Scroll to top -->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+    <!-- Scroll to top -->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-  @include('admin.layout_admin.script')
+    @include('admin.layout_admin.script')
+    @yield('js')
 </body>
 
 </html>
