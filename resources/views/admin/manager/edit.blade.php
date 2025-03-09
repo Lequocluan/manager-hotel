@@ -25,7 +25,7 @@
                                 class="form-control @error('name') is-invalid @enderror" id="name"
                                 aria-describedby="emailHelp" name="name">
                             @error('name')
-                                <div class="message-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
@@ -34,7 +34,7 @@
                                 class="form-control @error('email') is-invalid @enderror" id="email"
                                 aria-describedby="emailHelp" name="email">
                             @error('email')
-                                <div class="message-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
@@ -49,7 +49,7 @@
                                     <label for="female">Nữ</label>
                                 </div>
                                 @error('gender')
-                                    <div class="message-error">{{ $message }}</div>
+                                    <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                             <input type="number" value="{{ $manager->phone }}" placeholder="Nhập số điện thoại"
                                 class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone">
                             @error('phone')
-                                <div class="message-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
@@ -66,7 +66,7 @@
                             <input type="text" class="form-control @error('password') is-invalid @enderror"
                                 id="password" name="password" placeholder="Nhập mật khẩu">
                             @error('password')
-                                <div class="message-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
@@ -79,7 +79,7 @@
                             <input type="text" value="{{ $manager->address }}" class="form-control @error('address') is-invalid @enderror" id="address" name="address"
                                 placeholder="Nhập địa chỉ">
                             @error('address')
-                                <div class="message-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>

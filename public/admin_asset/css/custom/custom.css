@@ -2,3 +2,10 @@
     margin-top: 5px;
     color: red;
 }
+.card {
+    border-radius: 10px;
+    padding: 20px;
+}
+.img-fluid {
+    border: 3px solid #007bff;
+}

@@ -170,14 +170,14 @@
                     <span class="fa fa-user"></span>
                     <input type="email" class="@error('email') is-invalid @enderror" name="email" id="email"  placeholder="Nhập email">
                     @error('email')
-                        <div class="message-error">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="field space">
                     <span class="fa fa-lock"></span>
                     <input type="password" class="password @error('password') is-invalid @enderror" name="password"  placeholder="Mật khẩu">
                     @error('password')
-                        <div class="message-error">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="pass">

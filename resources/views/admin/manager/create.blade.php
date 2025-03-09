@@ -19,7 +19,7 @@
                             <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
                                 name="name" placeholder="Nhập tên nhân viên" value="{{ old('name') }}">
                             @error('name')
-                                <div class="message-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="mb-3 col-md-6">
@@ -27,7 +27,7 @@
                             <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
                                 name="email" placeholder="Nhập email" value="{{ old('email') }}">
                             @error('email')
-                                <div class="message-error">{{ $message }}</div>
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
                     </div>

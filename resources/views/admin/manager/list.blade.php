@@ -32,17 +32,6 @@
                     <th>Xử lý</th>
                 </tr>
                 </thead>
-                <tfoot>
-                <tr>
-                    <th>STT</th>
-                    <th>Ảnh</th>
-                    <th>Tên</th>
-                    <th>Email</th>
-                    <th>SĐT</th>
-                    <th>Giới tính</th>
-                    <th>Xử lý</th>
-                </tr>
-                </tfoot>
                 <tbody>
                 @foreach ($managers as $key => $manager)
                     <tr>
