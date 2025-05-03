@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\RoomTypeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,5 +31,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
         Route::get('/edit-account', [AuthController::class, 'edit_account'])->name('admin.edit-account');
         Route::post('/edit-account', [AuthController::class, 'handle_edit_account'])->name('admin.handle_edit_account');
     });
+    Route::resource('/room-types', RoomTypeController::class);
+    
     Route::resource('/manager', AdminController::class);
 });

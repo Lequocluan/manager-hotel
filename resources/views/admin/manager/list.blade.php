@@ -40,7 +40,7 @@
                             @if ($manager->avatar)
                             <img src="{{ $manager->avatar }}" alt="Chưa cập nhật" height="30" width="30" />
                             @else
-                            <img src="/uploads/avatars/avatar.png" alt="Chưa cập nhật" height="30" width="30" />
+                            <img src="/uploads/avatars/user.png" alt="Chưa cập nhật" height="30" width="30" />
                             @endif
                         </td>
                         <td>{{ $manager->name }}</td>

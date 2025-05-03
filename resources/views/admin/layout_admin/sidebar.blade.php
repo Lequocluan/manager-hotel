@@ -16,4 +16,16 @@
             <i class="fas fa-user"></i>
           <span>Nhân viên</span></a>
     </li> 
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Phòng</span>
+        </a>
+        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar" style="">
+            <div class="bg-white py-2 collapse-inner ">
+            <a class="collapse-item" href="{{ route('room-types.index')}}">Loại phòng</a>
+            <a class="collapse-item" href="#">Danh sách phòng</a>
+            </div>
+        </div>        
+    </li>
   </ul>
