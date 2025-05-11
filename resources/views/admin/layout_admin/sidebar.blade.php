@@ -24,7 +24,7 @@
         <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar" style="">
             <div class="bg-white py-2 collapse-inner ">
             <a class="collapse-item" href="{{ route('room-types.index')}}">Loại phòng</a>
-            <a class="collapse-item" href="#">Danh sách phòng</a>
+            <a class="collapse-item" href="{{ route('rooms.index') }}">Danh sách phòng</a>
             </div>
         </div>        
     </li>

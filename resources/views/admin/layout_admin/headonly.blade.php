@@ -12,4 +12,5 @@
   <link href="/admin_asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/admin_asset/css/ruang-admin.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{{ asset("admin_asset/css/toastr.min.css") }}">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
