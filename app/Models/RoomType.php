@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class RoomType extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'description', 'image', 'price', 'status'];
+    protected $fillable = ['name', 'overview', 'description', 'slug', 'image', 'price', 'status'];
+    public function images()
+    {
+        return $this->hasMany(RoomTypeImage::class);
+    }
 }

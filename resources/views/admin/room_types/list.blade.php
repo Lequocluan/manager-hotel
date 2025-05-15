@@ -48,7 +48,7 @@
                             </td>
                             <td>{{ $roomType->name }}</td>
                             <td>{{ number_format($roomType->price) }}</td>
-                            <td>{{ Str::limit($roomType->description, 50) }}</td>
+                            <td>{{ Str::limit($roomType->overview, 50) }}</td>
                             <td>
                                 @if ($roomType->status == 1)
                                     <span class="badge bg-success">Hoạt động</span>

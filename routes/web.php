@@ -35,4 +35,9 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::resource('/room-types', RoomTypeController::class);
     Route::resource('/rooms', RoomController::class);
     Route::resource('/manager', AdminController::class);
+    Route::post('/room-types/upload-temp', [RoomTypeController::class, 'uploadTemp']);
+    Route::post('/room-types/revert-temp', [RoomTypeController::class, 'revertTemp']);
+    Route::post('/room-types/remove-existing-image', [RoomTypeController::class, 'removeExistingImage']);
+    Route::put('/room-types/{id}', [RoomTypeController::class, 'update']);
+
 });
