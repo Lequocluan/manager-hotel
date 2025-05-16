@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\RoomController;
+use App\Http\Controllers\Admin\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,5 +40,7 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::post('/room-types/revert-temp', [RoomTypeController::class, 'revertTemp']);
     Route::post('/room-types/remove-existing-image', [RoomTypeController::class, 'removeExistingImage']);
     Route::put('/room-types/{id}', [RoomTypeController::class, 'update']);
+
+    Route::resource('services', ServiceController::class);
 
 });

@@ -28,4 +28,9 @@
             </div>
         </div>        
     </li>
+    <li class="nav-item {{ request()->routeIs('services*') ? 'active' : '' }}">
+        <a href="{{ route('services.index') }}" class="nav-link">
+        <i class="fas fa-concierge-bell"></i>
+        <span>Dịch vụ</span></a>
+    </li>
   </ul>
