@@ -5,32 +5,53 @@
       </div>
       <div class="sidebar-brand-text mx-3">HAVANA</div>
     </a>
+
     <hr class="sidebar-divider my-0">
+
     <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
       <a class="nav-link" href="{{ route('admin.dashboard') }}">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <i class="fas fa-chart-line"></i>
         <span>Dashboard</span></a>
     </li>
+
     <li class="nav-item {{ request()->routeIs('manager*') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('manager.index') }}">
-            <i class="fas fa-user"></i>
+            <i class="fas fa-users-cog"></i>
           <span>Nhân viên</span></a>
     </li> 
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="false" aria-controls="collapseTable">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Phòng</span>
+
+    <li class="nav-item {{ request()->routeIs('room-types*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('room-types.index') }}">
+            <i class="fas fa-layer-group"></i>
+            <span>Loại phòng</span>
         </a>
-        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar" style="">
-            <div class="bg-white py-2 collapse-inner ">
-            <a class="collapse-item" href="{{ route('room-types.index')}}">Loại phòng</a>
-            <a class="collapse-item" href="{{ route('rooms.index') }}">Danh sách phòng</a>
-            </div>
-        </div>        
     </li>
+
+    <li class="nav-item {{ request()->routeIs('rooms*') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('rooms.index') }}">
+            <i class="fas fa-hotel"></i>
+            <span>Danh sách phòng</span>
+        </a>
+    </li>
+
     <li class="nav-item {{ request()->routeIs('services*') ? 'active' : '' }}">
         <a href="{{ route('services.index') }}" class="nav-link">
         <i class="fas fa-concierge-bell"></i>
         <span>Dịch vụ</span></a>
     </li>
-  </ul>
+
+    <li class="nav-item {{ request()->routeIs('news-category*') ? 'active' : '' }}">
+        <a href="{{ route('news-category.index') }}" class="nav-link">
+            <i class="fas fa-folder-open"></i>
+            <span>Danh mục bài viết</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{ request()->routeIs('news.*') ? 'active' : '' }}">
+        <a href="{{ route('news.index')}}" class="nav-link">
+            <i class="fas fa-newspaper"></i>
+            <span>Bài viết</span>
+        </a>
+    </li>
+
+</ul>
