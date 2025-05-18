@@ -51,7 +51,7 @@
                                 @if ($item->status == 1)
                                     <span class="badge bg-success">Hiển thị</span>
                                 @else
-                                    <span class="badge bg-secondary">Ẩn</span>
+                                    <span class="badge bg-secondary text-white">Ẩn</span>
                                 @endif
                             </td>
                             <td>

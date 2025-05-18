@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\NewsCategory;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap();
+        View::share('allCategories', NewsCategory::where('status', 1)->get());
     }
 
 }

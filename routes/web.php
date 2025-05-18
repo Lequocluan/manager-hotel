@@ -8,6 +8,8 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\NewsController as UserNewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,6 +48,8 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::resource('/services', ServiceController::class);
     Route::resource('/news-category', NewsCategoryController::class);
     Route::resource('/news', NewsController::class);
-
-
 });
+Route::get('/', [HomeController::class, 'index']) -> name('home');
+Route::get('/{slugCategory}/{slugBlog}', [UserNewsController::class, 'blog_detail']) -> name('news.blog-detail');
+Route::get('/{slug}', [UserNewsController::class, 'category']) -> name('news.category');
+
