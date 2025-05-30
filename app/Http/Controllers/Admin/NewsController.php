@@ -139,7 +139,7 @@ class NewsController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Có lỗi xảy ra khi xóa tin tức'
+                'message' => 'Có lỗi xảy ra khi xóa tin tức: ' . $e,
             ]);
         }
     }

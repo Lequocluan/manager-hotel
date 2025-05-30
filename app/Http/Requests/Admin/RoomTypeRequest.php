@@ -47,6 +47,7 @@ class RoomTypeRequest extends FormRequest
             'name.unique' => 'Tên loại phòng đã tồn tại',
 
             'overview.string' => 'Mô tả phải là chuỗi',
+            'overview.max' => 'Mô tả không được vượt quá 255 ký tự',
             'description.string' => 'Mô tả chi tiết phải là chuỗi',
 
             'image.image' => 'Ảnh đại diện không đúng định dạng',

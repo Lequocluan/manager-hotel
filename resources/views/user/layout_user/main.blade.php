@@ -4,6 +4,8 @@
 <head>
     @include('user.layout_user.headonly')
     @yield('css')
+    @yield('meta')
+
 </head>
     @include('user.layout_user.header')
     @yield('content')

@@ -32,7 +32,7 @@ class NewsController extends Controller
         $news->load('newsCategories');
 
         $allCategories = NewsCategory::where('status', 1)->get();
-        $title = 'Chi tiết tin tức';
+        $title = $news->name;
         $recommendedNews = \App\Models\News::where('id', '!=', $news->id)
             ->where('status', 1)
             ->orderByDesc('created_at')

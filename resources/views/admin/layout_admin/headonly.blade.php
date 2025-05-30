@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
   <link href="/admin_asset/img/logo.png" rel="icon">
-  <title>{{ $title ?? "admin" }}</title>
+  <title>{{ $title ?? "admin" }} | Trang quản trị khách sạn Havana</title>
   <link href="/admin_asset/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="/admin_asset/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
   <link href="/admin_asset/css/ruang-admin.min.css" rel="stylesheet">

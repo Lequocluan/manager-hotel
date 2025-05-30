@@ -29,7 +29,8 @@ class RoomTypeController extends Controller
     public function create()
     {
         $title = 'Thêm loại phòng';
-        return view('admin.room_types.add', compact('title'));
+        $roomType = new RoomType();
+        return view('admin.room_types.add', compact('title', 'roomType'));
     }
 
     public function uploadTemp(Request $request)
@@ -83,6 +84,8 @@ class RoomTypeController extends Controller
             'description' => $request->description,
             'image' => $imagePath,
             'price' => $request->price,
+            'bed_type' => $request->bed_type,
+            'size' => $request->size,
             'status' => $request->status,
         ]);
 
@@ -184,6 +187,8 @@ class RoomTypeController extends Controller
                 'overview' => $request->overview,
                 'description' => $request->description,
                 'price' => $request->price,
+                'bed_type' => $request->bed_type,
+                'size' => $request->size,
                 'status' => $request->status,
                 'image' => $roomType->image ?? $roomType->getOriginal('image'),
             ]);

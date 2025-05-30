@@ -1,0 +1,19 @@
+#top-nav {
+  background: #f8f9fa;
+  transition: top 0.3s;
+  position: relative; /* ban đầu là relative, không đè */
+  z-index: 10;
+}
+
+#menu-bar {
+  background: #fff;
+  transition: top 0.3s;
+  z-index: 999;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}

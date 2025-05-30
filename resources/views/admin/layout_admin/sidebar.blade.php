@@ -53,5 +53,22 @@
             <span>Bài viết</span>
         </a>
     </li>
-
+    <li class="nav-item {{ request()->routeIs('guests*') ? 'active' : '' }}">
+        <a href="{{ route('guests.index') }}" class="nav-link">
+            <i class="fas fa-users"></i>
+            <span>Khách hàng</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('booked-rooms.index') }}" class="nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Quản lý đặt phòng</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.contacts.index') }}" class="nav-link">
+            <i class="fas fa-calendar-check"></i>
+            <span>Phản hồi khách hàng</span>
+        </a>
+    </li>
 </ul>

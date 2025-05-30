@@ -4,7 +4,7 @@
 <div class="container-fluid">
     <div class="d-flex align-items-center mb-3">
         <a href="{{ route('room-types.index') }}" class="btn btn-outline-secondary btn-sm rounded-circle me-2" title="Quay lại">
-            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-left"></i> 
         </a>
         <h2 class="m-0">Thêm loại phòng</h2>
     </div>
@@ -24,20 +24,68 @@
                     </div>
 
                     <div class="col-md-6 mb-3">
-                        <label for="price" class="form-label fw-bold">Giá (VNĐ)</label>
-                        <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Nhập giá phòng">
-                        @error('price')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="price" class="form-label fw-bold">Giá (VNĐ)</label>
+                                <input type="number" name="price" class="form-control @error('price') is-invalid @enderror" placeholder="Nhập giá phòng">
+                                @error('price')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-6">
+                                <label for="size" class="form-label fw-bold">Diện tích phòng <span style="font-style: italic;">(m<sup>2</sup>)</span></label>
+                                <input type="number" name="size" class="form-control @error('size') is-invalid @enderror" placeholder="Nhập diện tích phòng">
+                                @error('size')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="overview" class="form-label fw-bold">Mô tả</label>
-                    <textarea name="overview" rows="3" class="form-control @error('overview') is-invalid @enderror" rows="3" placeholder="Nhập mô tả về loại phòng..."></textarea>
-                    @error('overview')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="overview" class="form-label fw-bold">Mô tả</label>
+                        <textarea name="overview" rows="2" class="form-control @error('overview') is-invalid @enderror" rows="3" placeholder="Nhập mô tả về loại phòng..."></textarea>
+                        @error('overview')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="max_adults" class="form-label fw-bold">Số người lớn tối đa</label>
+                                <input value="{{ old('max_adults', 2) }}" readonly type="number" name="max_adults" class="form-control @error('max_adults') is-invalid @enderror">
+                                @error('max_adults')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-4">
+                                <label for="max_children" class="form-label fw-bold">Số trẻ em tối đa</label>
+                                <input readonly value="{{ old('max_children', 2) }}" type="number" name="max_children" class="form-control @error('max_children') is-invalid @enderror">
+                                @error('max_children')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                            <div class="col-md-4">
+                                <label for="bed_type" class="form-label fw-bold">Loại giường</label>
+                                <select name="bed_type" class="form-control @error('bed_type') is-invalid @enderror">
+                                    <option value="">-- Chọn loại giường --</option>
+                                    <option value="Single (1m x 2m)">Giường đơn (1m x 2m)</option>
+                                    <option value="Twin (1.2m x 2m)">Giường đôi nhỏ - Twin (1.2m x 2m)</option>
+                                    <option value="Double (1.4m x 2m)">Giường đôi tiêu chuẩn - Double (1.4m x 2m)</option>
+                                    <option value="Queen (1.6m x 2m)">Queen bed (1.6m x 2m)</option>
+                                    <option value="King (1.8m x 2m)">King bed (1.8m x 2m)</option>
+                                    <option value="Super King (2m x 2m)">Super King (2m x 2m)</option>
+                                </select>
+                                @error('bed_type')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="mb-3">
@@ -58,20 +106,25 @@
                         @enderror
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="image" class="form-label fw-bold">Hình ảnh</label>
-                        <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" accept="image/*">
-                        @error('image')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="image" class="form-label fw-bold">Hình ảnh</label>
+                                <input type="file" name="image" id="image" class="form-control @error('image') is-invalid @enderror" accept="image/*">
+                                @error('image')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="status" class="form-label fw-bold">Trạng thái</label>
+                                <select name="status" class="form-control">
+                                    <option value="1" selected>Hoạt động</option>
+                                    <option value="0">Tạm ngưng</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
-                <div class="col-md-6 mb-3">
-                    <label for="status" class="form-label fw-bold">Trạng thái</label>
-                    <select name="status" class="form-control">
-                        <option value="1" selected>Hoạt động</option>
-                        <option value="0">Tạm ngưng</option>
-                    </select>
                 </div>
                 <script>
                     document.querySelector('form').addEventListener('submit', function () {

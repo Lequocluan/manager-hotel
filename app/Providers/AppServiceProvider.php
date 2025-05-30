@@ -7,6 +7,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Contact;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,6 +26,21 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         View::share('allCategories', NewsCategory::where('status', 1)->get());
+
+        View::composer('admin.*', function ($view) {
+        $unreadContacts = Contact::where('replied', false)
+            ->where('replied', false)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $unreadCount = $unreadContacts->count();
+        
+        $view->with([
+            'unreadContacts' => $unreadContacts,
+            'unreadCount' => $unreadCount,
+        ]);
+    });
     }
 
 }

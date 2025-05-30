@@ -4,11 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\EditAccountRequest;
+use App\Http\Requests\Admin\ForgotPasswordRequest;
 use App\Http\Requests\Admin\LoginRequest;
+use App\Http\Requests\Admin\ResetPasswordRequest;
 use App\Http\Requests\Admin\UpdatePasswordRequest;
+use App\Mail\AdminResetPasswordMail;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -116,5 +124,80 @@ class AuthController extends Controller
             Session::flash('error', 'Có lỗi xảy ra, vui lòng thử lại sau!');
             return redirect()->back();
         }
+    }
+
+    public function showForgotPasswordForm()
+    {
+        return view('admin.auth.forgot_password');
+    }
+
+    public function handleForgotPassword(ForgotPasswordRequest $request)
+    {
+        $request->validate([
+            'email' => 'required|email|exists:admins,email',
+        ], [
+        'email.exists' => 'Email không tồn tại trong hệ thống.',]);
+
+        $token = Str::random(64);
+        DB::table('password_reset_tokens')->updateOrInsert(
+            ['email' => $request->email],
+            [
+                'token' => Hash::make($token),
+                'created_at' => Carbon::now()
+            ]
+        );
+
+        $url = route('password.reset', [
+            'token' => $token,
+            'email' => $request->email
+        ]);
+
+        Mail::to($request->email)->send(new AdminResetPasswordMail($url));
+
+        return back()->with('message', 'Liên kết đặt lại mật khẩu đã được gửi qua email.');
+    }
+
+    public function showResetPasswordForm(Request $request, $token)
+    {
+        $email = $request->query('email');
+
+        if (!$email) {
+            return redirect()->route('login')->withErrors(['email' => 'Email không hợp lệ hoặc không tồn tại trong link.']);
+        }
+
+        return view('admin.auth.reset_password', [
+            'token' => $token,
+            'email' => $email,
+        ]);
+    }
+
+    public function handleResetPassword(ResetPasswordRequest $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:8',
+        ]);
+
+        $record = DB::table('password_reset_tokens')
+            ->where('email', $request->email)
+            ->first();
+
+        if (!$record || !Hash::check($request->token, $record->token)) {
+            return back()->withErrors(['token' => 'Token không hợp lệ hoặc đã hết hạn.']);
+        }
+
+        $admin = \App\Models\Admin::where('email', $request->email)->first();
+        if (!$admin) {
+            return back()->withErrors(['email' => 'Email không tồn tại trong hệ thống.']);
+        }
+
+        $admin->password = Hash::make($request->password);
+        $admin->save();
+
+        // Xóa token sau khi dùng
+        DB::table('password_reset_tokens')->where('email', $request->email)->delete();
+
+        return redirect()->route('login')->with('success', 'Đặt lại mật khẩu thành công, vui lòng đăng nhập.');
     }
 }

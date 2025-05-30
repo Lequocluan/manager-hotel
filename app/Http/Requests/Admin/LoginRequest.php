@@ -22,8 +22,18 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required|email|exists:admins,email',
             'password' => 'required|min:5',
+        ];
+    }
+    public function messages()
+    {
+        return[
+            'email.required' => 'Email không được để trống',
+            'email.exists' => 'Email không tồn tại trong hệ thống',
+            
+            'password.required' => 'Mật khẩu không được để trống',
+            'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự',
         ];
     }
 }

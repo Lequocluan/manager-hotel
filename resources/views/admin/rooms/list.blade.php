@@ -42,14 +42,10 @@
                             <td>{{ $room->roomType->name ?? 'Không xác định' }}</td>
                             <td>{{ Str::limit($room->description, 50) }}</td>
                             <td>
-                                @if ($room->status == 0)
-                                    <span class="badge bg-success">Trống</span>
-                                @elseif ($room->status == 1)
-                                    <span class="badge bg-warning text-dark">Đã đặt</span>
-                                @elseif ($room->status == 2)
-                                    <span class="badge bg-info text-dark">Đang dọn</span>
-                                @else
-                                    <span class="badge bg-secondary">Không rõ</span>
+                                @if ($room->status == 1)
+                                    <span class="badge bg-secondary text-white">Ẩn</span>
+                                @elseif ($room->status == 0)
+                                    <span class="badge bg-success">Hiển thị</span>
                                 @endif
                             </td>
                             <td>

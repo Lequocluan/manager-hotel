@@ -7,3 +7,4 @@
     <script src="/user_asset/js/jquery.slicknav.js"></script>
     <script src="/user_asset/js/owl.carousel.min.js"></script>
     <script src="/user_asset/js/main.js"></script>
+    <script src="/user_asset/js/custom.js"></script>

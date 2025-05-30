@@ -10,19 +10,20 @@
     </div>
     <div class="offcanvas-menu-wrapper">
         <div class="canvas-close">
-            <i class="icon_close"></i>
+            <i class="fa fa-close"></i>
         </div>
         <div class="search-icon  search-switch">
             <i class="icon_search"></i>
+            <a href="{{ route('booking.start') }}" class="bk-btn d-none" id="sticky-booking-btn">Đặt ngay</a>
         </div>
         <div class="header-configure-area">
-            <a href="#" class="bk-btn">Booking Now</a>
+            <a href="{{ route('booking.start') }}" class="bk-btn">Đặt ngay</a>
         </div>
         <nav class="mainmenu mobile-menu">
             <ul>
-                <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                <li><a href="./rooms.html">Rooms</a></li>
-                <li><a href="./about-us.html">About Us</a></li>
+                <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
+                <li><a href="{{route('roomtypes.list')}}">Loại phòng</a></li>
+                <li><a href="{{ route('aboutUs') }}">Về chúng tôi</a></li>
                 <li><a href="./pages.html">Pages</a>
                     <ul class="dropdown">
                         <li><a href="./room-details.html">Room Details</a></li>
@@ -32,7 +33,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="{{ route('news.category', ['slug' => $allCategories[0]->slug ?? 'news']) }}">News</a>
+                    <a href="{{ route('news.category', ['slug' => $allCategories[0]->slug ?? 'news']) }}">Tin tức</a>
                     <ul class="dropdown">
                         @foreach($allCategories as $cat)
                             <li>
@@ -41,25 +42,24 @@
                         @endforeach
                     </ul>
                 </li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="{{ route('contact')}}">Liên hệ</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
         <div class="top-social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-tripadvisor"></i></a>
-            <a href="#"><i class="fa fa-instagram"></i></a>
+            <a target="_blank" href="https://www.facebook.com/havananhatranghotel"><i class="fa fa-facebook-f"></i></a>
+            <a target="_blank" href="https://x.com/Havananhatrang"><i class="fa fa-twitter"></i></a>
+            <a target="_blank" href="https://www.instagram.com/havananhatrang"><i class="fa fa-instagram"></i></a>
         </div>
         <ul class="top-widget">
             <li><i class="fa fa-phone"></i> (12) 345 67890</li>
-            <li><i class="fa fa-envelope"></i> info.colorlib@gmail.com</li>
+            <li><i class="fa fa-envelope"></i>info@havanahotel.vn</li>
         </ul>
     </div>
     <!-- Offcanvas Menu Section End -->
 
 <header class="header-section">
-        <div class="top-nav">
+        <div class="top-nav" id="top-nav">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6">
@@ -71,23 +71,23 @@
                     <div class="col-lg-6">
                         <div class="tn-right">
                             <div class="top-social">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-envelope"></i></a>
-                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a target="_blank" href="https://www.facebook.com/havananhatranghotel"><i class="fa fa-facebook-f"></i></a>
+                                <a target="_blank" href="https://x.com/Havananhatrang"><i class="fa fa-twitter"></i></a>
+                                <a target="_blank" href="https://www.instagram.com/havananhatrang"><i class="fa fa-instagram"></i></a>
                             </div>
-                            <a href="#" class="bk-btn">Booking Now</a>
+                            <a href="{{ route('booking.start') }}" class="bk-btn">Đặt ngay</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="menu-item">
+        <div class="menu-item fixed-top shadow-sm bg-white" id="menu-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
                             <a href="{{ route('home') }}">
-                                <img src="/user_asset/img/logo.png" alt="">
+                                <img width="50px"; height="50px" src="https://havanahotel.vn/storage/logo-mini.png" alt="">
                             </a>
                         </div>
                     </div>
@@ -95,19 +95,11 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                                    <li><a href="./rooms.html">Rooms</a></li>
-                                    <li><a href="./about-us.html">About Us</a></li>
-                                    <li><a href="./pages.html">Pages</a>
-                                        <ul class="dropdown">
-                                            <li><a href="./room-details.html">Room Details</a></li>
-                                            <li><a href="./blog-details.html">Blog Details</a></li>
-                                            <li><a href="#">Family Room</a></li>
-                                            <li><a href="#">Premium Room</a></li>
-                                        </ul>
-                                    </li>
+                                    <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
+                                    <li><a href="{{route('roomtypes.list')}}">Loại phòng</a></li>
+                                    <li><a href="{{ route('aboutUs') }}">Về chúng tôi</a></li>
                                     <li>
-                                        <a href="{{ route('news.category', ['slug' => $allCategories[0]->slug ?? 'news']) }}">News</a>
+                                        <a href="{{ route('news.category', ['slug' => $allCategories[0]->slug ?? 'news']) }}">Tin tức</a>
                                         <ul class="dropdown">
                                             @foreach($allCategories as $cat)
                                                 <li>
@@ -116,7 +108,7 @@
                                             @endforeach
                                         </ul>
                                     </li>
-                                    <li><a href="./contact.html">Contact</a></li>
+                                    <li><a href="{{ route('contact')}}">Liên hệ</a></li>
                                 </ul>
                             </nav>
                             <div class="nav-right search-switch">
@@ -128,26 +120,3 @@
             </div>
         </div>
     </header>
-<script>
-    // Xử lý active cho menu khi click
-    document.addEventListener('DOMContentLoaded', function () {
-        // Desktop menu
-        document.querySelectorAll('.mainmenu > ul > li > a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                document.querySelectorAll('.mainmenu > ul > li').forEach(function(li) {
-                    li.classList.remove('active');
-                });
-                this.parentElement.classList.add('active');
-            });
-        });
-        // Mobile menu
-        document.querySelectorAll('.mobile-menu ul > li > a').forEach(function(link) {
-            link.addEventListener('click', function() {
-                document.querySelectorAll('.mobile-menu ul > li').forEach(function(li) {
-                    li.classList.remove('active');
-                });
-                this.parentElement.classList.add('active');
-            });
-        });
-    });
-</script>

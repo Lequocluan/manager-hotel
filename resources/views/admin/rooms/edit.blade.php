@@ -16,7 +16,7 @@
                 @method('PUT')
 
                 <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label for="name" class="form-label fw-bold">Tên phòng</label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
                                value="{{ old('name', $room->name) }}" placeholder="Nhập tên phòng">
@@ -25,7 +25,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-4 mb-3">
                         <label for="room_type_id" class="form-label fw-bold">Loại phòng</label>
                         <select name="room_type_id" class="tag-select form-control @error('room_type_id') is-invalid @enderror">
                             @foreach ($roomTypes as $roomType)
@@ -38,27 +38,36 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="col-md-4">
+                        <label for="status" class="form-label fw-bold">Trạng thái</label>
+                        <select name="status" class="form-control @error('status') is-invalid @enderror">
+                            <option value="0" {{ $room->status == 0 ? 'selected' : '' }}>Hiển thị</option>
+                            <option value="1" {{ $room->status == 1 ? 'selected' : '' }}>Ẩn</option>
+                        </select>
+                        @error('status')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
-                <div class="mb-3">
-                    <label for="description" class="form-label fw-bold">Mô tả</label>
-                    <textarea name="description" class="form-control @error('description') is-invalid @enderror"
-                              rows="3" placeholder="Nhập mô tả về phòng...">{{ old('description', $room->description) }}</textarea>
-                    @error('description')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
 
-                <div class="mb-3">
-                    <label for="status" class="form-label fw-bold">Trạng thái</label>
-                    <select name="status" class="form-control @error('status') is-invalid @enderror">
-                        <option value="0" {{ $room->status == 0 ? 'selected' : '' }}>Trống</option>
-                        <option value="1" {{ $room->status == 1 ? 'selected' : '' }}>Đã đặt</option>
-                        <option value="2" {{ $room->status == 2 ? 'selected' : '' }}>Bảo trì</option>
-                    </select>
-                    @error('status')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="description" class="form-label fw-bold">Mô tả</label>
+                        <textarea name="description" class="form-control @error('description') is-invalid @enderror"
+                                rows="3" placeholder="Nhập mô tả về phòng...">{{ old('description', $room->description) }}</textarea>
+                        @error('description')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>  
+                    <div class="col-md-6">
+                        <label for="view" class="form-label fw-bold">Hướng phòng</label>
+                        <input type="text" name="view" class="form-control @error('view') is-invalid @enderror"
+                               value="{{ old('view', $room->view) }}" placeholder="VD: biển, núi, thành phố...">
+                        @error('view')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="text-center">

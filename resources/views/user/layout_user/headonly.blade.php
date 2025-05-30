@@ -1,11 +1,12 @@
 
     @routes
     <meta charset="UTF-8">
-    <meta name="description" content="Sona Template">
-    <meta name="keywords" content="Sona, unica, creative, html">
+    <link rel="shortcut icon" href="https://havanahotel.vn/storage/logo-mini.png">
+    <meta name="description" content="Havana hotel"> 
+    <meta name="keywords" content="Havana, nha trang, khách sạn, 5 sao">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Havana Nha Trang Hotel - Khách sạn 5 Sao Havana Nha Trang</title>
+    <title>{{ $title ?? "Havana Nha Trang Hotel" }} | Khách sạn 5 Sao Havana Nha Trang</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
@@ -22,4 +23,5 @@
     <link rel="stylesheet" href="/user_asset/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="/user_asset/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/user_asset/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/user_asset/css/custom/custom.css" type="text/css">
     <meta name="csrf-token" content="{{ csrf_token() }}">

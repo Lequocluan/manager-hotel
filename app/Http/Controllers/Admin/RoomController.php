@@ -39,6 +39,7 @@ class RoomController extends Controller
         Room::create([
             'name' => $request->name,
             'room_type_id' => $request->room_type_id,
+            'view' => $request->view,
             'description' => $request->description,
             'status' => $request->status,
         ]);
@@ -72,6 +73,7 @@ class RoomController extends Controller
         $room->update([
             'name' => $request->name,
             'room_type_id' => $request->room_type_id,
+            'view' => $request->view,
             'description' => $request->description,
             'status' => $request->status,
         ]);

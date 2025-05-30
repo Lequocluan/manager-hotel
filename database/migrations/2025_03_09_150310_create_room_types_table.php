@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->decimal('price', 10, 2);
+            $table->integer('max_adults')->default(2);
+            $table->integer('max_children')->default(2);
+            $table->string('bed_type')->nullable();
+            $table->string('size')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

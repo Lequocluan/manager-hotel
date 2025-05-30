@@ -8,40 +8,48 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="hero-text">
-                        <h1>Sona A Luxury Hotel</h1>
-                        <p>Here are the best hotel booking sites, including recommendations for international
-                            travel and for finding low-priced hotel rooms.</p>
+                        <h1>Havana Hotel</h1>
+                        <p style="font-size: 20px">Khách sạn Havana tự hào là điểm dừng chân lý tưởng cho du khách trong và ngoài nước khi đến với thành phố Nha Trang.</p>
                         <a href="#" class="primary-btn">Discover Now</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
                         <h3>Booking Your Hotel</h3>
-                        <form action="#">
+                        <form id="booking-form" action="{{ route('booking.step1') }}" method="POST">
+                            @csrf
                             <div class="check-date">
                                 <label for="date-in">Check In:</label>
-                                <input type="text" class="date-input" id="date-in">
+                                <input type="text" class="date-input"id="date-in_"  readonly>
+                                <input type="hidden" id="date-in" name="checkin">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
                                 <label for="date-out">Check Out:</label>
-                                <input type="text" class="date-input" id="date-out">
+                                <input type="text" class="date-input" id="date-out_" readonly>
+                                <input type="hidden" id="date-out" name="checkout">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="select-option">
-                                <label for="guest">Guests:</label>
-                                <select id="guest">
-                                    <option value="">2 Adults</option>
-                                    <option value="">3 Adults</option>
+                                <label for="adults">Người lớn:</label>
+                                <select id="adults" name="adults" onchange="redirectIfOther(this)">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        <option value="{{ $i }}">{{ $i }} người</option>
+                                    @endfor
+                                    <option value="other">Khác...</option>
                                 </select>
                             </div>
+
                             <div class="select-option">
-                                <label for="room">Room:</label>
-                                <select id="room">
-                                    <option value="">1 Room</option>
-                                    <option value="">2 Room</option>
+                                <label for="children">Trẻ em:</label>
+                                <select id="children" name="children" onchange="redirectIfOther(this)">
+                                    @for ($i = 0; $i <= 5; $i++)
+                                        <option value="{{ $i }}">{{ $i }} trẻ em</option>
+                                    @endfor
+                                    <option value="other">Khác...</option>
                                 </select>
                             </div>
+
                             <button type="submit">Check Availability</button>
                         </form>
                     </div>
@@ -49,46 +57,36 @@
             </div>
         </div>
         <div class="hero-slider owl-carousel">
-            <div class="hs-item set-bg" data-setbg="/user_asset/img/hero/hero-1.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="/user_asset/img/hero/hero-2.jpg"></div>
-            <div class="hs-item set-bg" data-setbg="/user_asset/img/hero/hero-3.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="/user_asset/img/hero/hero-11.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="/user_asset/img/hero/hero-12.jpg"></div>
+            <div class="hs-item set-bg" data-setbg="/user_asset/img/hero/hero-13.jpg"></div>
         </div>
     </section>
     <!-- Hero Section End -->
 
     <!-- About Us Section Begin -->
-    <section class="aboutus-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="about-text">
-                        <div class="section-title">
-                            <span>About Us</span>
-                            <h2>Intercontinental LA <br />Westlake Hotel</h2>
-                        </div>
-                        <p class="f-para">Sona.com is a leading online accommodation site. We’re passionate about
-                            travel. Every day, we inspire and reach millions of travelers across 90 local websites in 41
-                            languages.</p>
-                        <p class="s-para">So when it comes to booking the perfect hotel, vacation rental, resort,
-                            apartment, guest house, or tree house, we’ve got you covered.</p>
-                        <a href="#" class="primary-btn about-btn">Read More</a>
+    <section class="aboutus-section spad" style="min-height: 100vh;">
+    <div class="container h-100">
+        <div class="row h-100">
+            <div class="col-lg-6 d-flex flex-column justify-content-center">
+                <div class="about-text">
+                    <div class="section-title">
+                        <span>About Us</span>
+                        <h2>{{ $aboutUs->title }}</h2>
                     </div>
+                    <p class="f-para">{!! $aboutUs->content !!}</p>
+                    <a href="{{ route('news.blog-detail', ['slugCategory' => $aboutUs->newsCategories->slug, 'slugBlog' => $aboutUs->slug]) }}" class="primary-btn about-btn">Read More</a>
                 </div>
-                <div class="col-lg-6">
-                    <div class="about-pic">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <img src="/user_asset/img/about/about-1.jpg" alt="">
-                            </div>
-                            <div class="col-sm-6">
-                                <img src="/user_asset/img/about/about-2.jpg" alt="">
-                            </div>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                <div style="max-width: 100%;">
+                    <img src="{{ $aboutUs->image }}" alt="img-about-us" class="img-fluid">
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
     <!-- About Us Section End -->
 
     <!-- Services Section End -->
@@ -161,122 +159,18 @@
         <div class="container-fluid">
             <div class="hp-room-items">
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="/user_asset/img/room/room-b1.jpg">
-                            <div class="hr-text">
-                                <h3>Double Room</h3>
-                                <h2>199$<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
+                    @foreach ($roomTypes as $roomType)
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="hp-room-item set-bg" data-setbg="{{ $roomType->image?? '/user_asset/img/room/room-1.jpg' }}">
+                                <div class="hr-text">
+                                    <h3>{{ $roomType->name }}</h3>
+                                    <h2>{{ number_format($roomType->price) }}VND<span> / night</span></h2>
+                                    <p>{{ $roomType->overview }}</p>
+                                    <a href="{{ route('roomtype.detail', ['slug' => $roomType->slug]) }}" class="primary-btn">Book Now</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="/user_asset/img/room/room-b2.jpg">
-                            <div class="hr-text">
-                                <h3>Premium King Room</h3>
-                                <h2>159$<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="/user_asset/img/room/room-b3.jpg">
-                            <div class="hr-text">
-                                <h3>Deluxe Room</h3>
-                                <h2>198$<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="hp-room-item set-bg" data-setbg="/user_asset/img/room/room-b4.jpg">
-                            <div class="hr-text">
-                                <h3>Family Room</h3>
-                                <h2>299$<span>/Pernight</span></h2>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>30 ft</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Capacity:</td>
-                                            <td>Max persion 5</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>King Beds</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Services:</td>
-                                            <td>Wifi, Television, Bathroom,...</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <a href="#" class="primary-btn">More Details</a>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
@@ -289,8 +183,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Testimonials</span>
-                        <h2>What Customers Say?</h2>
+                        <h2>Khách hàng nói gì?</h2>
                     </div>
                 </div>
             </div>
@@ -298,10 +191,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="testimonial-slider owl-carousel">
                         <div class="ts-item">
-                            <p>After a construction project took longer than expected, my husband, my daughter and I
-                                needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                                city, neighborhood and the types of housing options available and absolutely love our
-                                vacation at Sona Hotel.</p>
+                            <p>Chỗ nghỉ rộng rãi, tiện nghi đầy đủ, toạ lạc ngay trung tâm thành phố, thuận tiện đi bộ tới mọi nơi.. nhân viên nhiệt tình, thân thiện.</p>
                             <div class="ti-author">
                                 <div class="rating">
                                     <i class="icon_star"></i>
@@ -312,13 +202,10 @@
                                 </div>
                                 <h5> - Alexander Vasquez</h5>
                             </div>
-                            <img src="/user_asset/img/testimonial-logo.png" alt="">
+                            <img width="30px" height="30px" src="/uploads/avatars/user.png" alt="">
                         </div>
                         <div class="ts-item">
-                            <p>After a construction project took longer than expected, my husband, my daughter and I
-                                needed a place to stay for a few nights. As a Chicago resident, we know a lot about our
-                                city, neighborhood and the types of housing options available and absolutely love our
-                                vacation at Sona Hotel.</p>
+                            <p>Chỗ nghỉ rộng rãi, tiện nghi đầy đủ, toạ lạc ngay trung tâm phố cổ Colmar, thuận tiện đi bộ tới mọi nơi.. nhân viên nhiệt tình, thân thiện.</p>
                             <div class="ti-author">
                                 <div class="rating">
                                     <i class="icon_star"></i>
@@ -329,7 +216,7 @@
                                 </div>
                                 <h5> - Alexander Vasquez</h5>
                             </div>
-                            <img src="/user_asset/user_asset/img/testimonial-logo.png" alt="">
+                            <img width="30px" height="30px" src="/uploads/avatars/user.png" alt="">
                         </div>
                     </div>
                 </div>
@@ -344,8 +231,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Hotel News</span>
-                        <h2>Our Blog & Event</h2>
+                        <h2>Tin tức và sự kiện của chúng tôi</h2>
                     </div>
                 </div>
             </div>
@@ -355,8 +241,8 @@
                     <div class="blog-item set-bg" data-setbg="{{ $blog->image }}">
                         <div class="bi-text">
                             <span class="b-tag">{{ $blog ->newsCategories->name }}</span>
-                            <div class="text-white text-truncate">
-                                <h4><a href="{{ route('news.blog-detail', ['slugCategory' => $blog->newsCategories->slug, 'slugBlog' => $blog->slug]) }}">{{ $blog -> title }}</a></h4>
+                            <div class="text-white">
+                                <h4 class=" text-truncate"><a href="{{ route('news.blog-detail', ['slugCategory' => $blog->newsCategories->slug, 'slugBlog' => $blog->slug]) }}">{{ $blog -> title }}</a></h4>
                             </div>
                             <div class="b-time"><i class="icon_clock_alt"></i> 15th April, 2019</div>
                         </div>
@@ -367,5 +253,56 @@
         </div>
     </section>
     <!-- Blog Section End -->
+
+@endsection
+@section('js')
+<script>
+    $(function () {
+    $(".date-input").datepicker({
+        minDate: 0,
+        dateFormat: 'dd MM, yy'
+    });
+
+    $('#booking-form').on('submit', function (e) {
+        const parseDate = (str) => {
+            const date = $.datepicker.parseDate('dd MM, yy', str);
+            return $.datepicker.formatDate('yy-mm-dd', date);
+        }
+
+        const checkinDisplay = $('#date-in_').val();
+        const checkoutDisplay = $('#date-out_').val();
+
+        if (!checkinDisplay || !checkoutDisplay) {
+            alert('Vui lòng chọn ngày nhận và trả phòng.');
+            e.preventDefault();
+            return;
+        }
+
+        const checkinDate = $.datepicker.parseDate('dd MM, yy', checkinDisplay);
+        const checkoutDate = $.datepicker.parseDate('dd MM, yy', checkoutDisplay);
+
+        if (checkinDate.getTime() === checkoutDate.getTime()) {
+            alert('Ngày nhận phòng và trả phòng phải khác nhau.');
+            e.preventDefault();
+            return;
+        }
+
+        if (checkoutDate < checkinDate) {
+            alert('Ngày trả phòng phải sau ngày nhận phòng.');
+            e.preventDefault();
+            return;
+        }
+
+        $('#date-in').val(parseDate(checkinDisplay));
+        $('#date-out').val(parseDate(checkoutDisplay));
+    });
+});
+
+    function redirectIfOther(selectElement) {
+        if (selectElement.value === 'other') {
+            window.location.href = "{{ route('booking.start') }}";
+        }
+    }
+</script>
 
 @endsection

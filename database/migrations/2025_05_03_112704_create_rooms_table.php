@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->foreignId('room_type_id')->constrained('room_types') ->onDelete('restrict');
+            $table->string('view')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(0);
             $table->timestamps();

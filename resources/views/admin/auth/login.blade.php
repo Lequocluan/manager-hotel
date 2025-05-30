@@ -82,7 +82,13 @@
             font-family: 'Poppins', sans-serif;
         }
 
-
+.invalid-feedback {
+    color: #c1c939; /* màu đỏ */
+    font-size: 0.875rem; /* nhỏ hơn text */
+    margin-top: 0.25rem;
+    display: block; 
+    font-style: italic;
+}
 
         .space {
             margin-top: 16px;
@@ -169,19 +175,19 @@
                 <div class="field">
                     <span class="fa fa-user"></span>
                     <input type="email" class="@error('email') is-invalid @enderror" name="email" id="email"  placeholder="Nhập email">
+                </div>
                     @error('email')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                </div>
                 <div class="field space">
                     <span class="fa fa-lock"></span>
                     <input type="password" class="password @error('password') is-invalid @enderror" name="password"  placeholder="Mật khẩu">
+                </div>
                     @error('password')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                </div>
                 <div class="pass">
-                    <a href="#">Quên mật khẩu?</a>
+                    <a href="{{ route('admin.forgot-password.form') }}">Quên mật khẩu?</a>
                 </div>
                 <div class="field">
                     <input type="submit" value="Đăng nhập">
