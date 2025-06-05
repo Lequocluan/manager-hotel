@@ -1,24 +1,18 @@
 @extends('user.layout_user.main')
 @section('content')
-    <!-- Breadcrumb Section Begin -->
+
     <div class="breadcrumb-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>About Us</h2>
-                        <div class="bt-option">
-                            <a href="./index.html">Home</a>
-                            <span>About Us</span>
-                        </div>
+                        <h2>Về chúng tôi</h2>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Breadcrumb Section End -->
-
-    <!-- About Us Page Section Begin -->
+    
     <section class="aboutus-page-section spad">
         <div class="container">
             <div class="about-page-text">
@@ -31,11 +25,10 @@
                     </div>
                     <div class="col-lg-5 offset-lg-1">
                         <ul class="ap-services">
-                            <li><i class="icon_check"></i> 20% Off On Accommodation.</li>
-                            <li><i class="icon_check"></i> Complimentary Daily Breakfast</li>
-                            <li><i class="icon_check"></i> 3 Pcs Laundry Per Day</li>
-                            <li><i class="icon_check"></i> Free Wifi.</li>
-                            <li><i class="icon_check"></i> Discount 20% On F&B</li>
+                            <li><i class="icon_check"></i> Miễn phí 3 món giặt ủi mỗi ngày.</li>
+                            <li><i class="icon_check"></i> Wifi tốc độ cao miễn phí.</li>
+                            <li><i class="icon_check"></i> Nơi đỗ xe rộng rãi.</li>
+                            <li><i class="icon_check"></i> Wifi miễn phí.</li>
                         </ul>
                     </div>
                 </div>
@@ -45,21 +38,21 @@
                     <div class="col-md-4">
                         <div class="ap-service-item set-bg" data-setbg="/user_asset/img/about/about-p1.jpg">
                             <div class="api-text">
-                                <h3>Restaurants Services</h3>
+                                <h3>Dịch vụ nhà hàng</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="ap-service-item set-bg" data-setbg="/user_asset/img/about/about-p2.jpg">
                             <div class="api-text">
-                                <h3>Travel & Camping</h3>
+                                <h3>Spa và thư giãn</h3>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="ap-service-item set-bg" data-setbg="/user_asset/img/about/about-p3.jpg">
                             <div class="api-text">
-                                <h3>Event & Party</h3>
+                                <h3>Sự kiện và ăn mừng</h3>
                             </div>
                         </div>
                     </div>
@@ -67,16 +60,14 @@
             </div>
         </div>
     </section>
-    <!-- About Us Page Section End -->
-
-    <!-- Video Section Begin -->
+    
     <section class="video-section set-bg" data-setbg="/user_asset/img/video-bg.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="video-text">
-                        <h2>Discover Our Hotel & Services.</h2>
-                        <p>It S Hurricane Season But We Are Visiting Hilton Head Island</p>
+                        <h2>Khám phá khách sạn & dịch vụ của chúng tôi.</h2>
+                        <p>View nhìn trên cao về khách sạn Havana của chúng tôi được quay bằng flycam.</p>
                         <a href="https://www.youtube.com/watch?v=n0fb901wbwk" class="play-btn video-popup"><img
                                 src="/user_asset/img/play.png" alt=""></a>
                     </div>
@@ -84,16 +75,14 @@
             </div>
         </div>
     </section>
-    <!-- Video Section End -->
-
-    <!-- Gallery Section Begin -->
+    
     <section class="gallery-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <span>Our Gallery</span>
-                        <h2>Discover Our Work</h2>
+                        <span>Thư viện ảnh</span>
+                        <h2>Khám phá không gian tại Havana</h2>
                     </div>
                 </div>
             </div>
@@ -101,21 +90,21 @@
                 <div class="col-lg-6">
                     <div class="gallery-item set-bg" data-setbg="/user_asset/img/gallery/gallery-1.jpg">
                         <div class="gi-text">
-                            <h3>Room Luxury</h3>
+                            <h3>Phòng nghỉ cao cấp</h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="gallery-item set-bg" data-setbg="/user_asset/img/gallery/gallery-3.jpg">
                                 <div class="gi-text">
-                                    <h3>Room Luxury</h3>
+                                    <h3>Nhà hàng sang trọng</h3>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="gallery-item set-bg" data-setbg="/user_asset/img/gallery/gallery-4.jpg">
                                 <div class="gi-text">
-                                    <h3>Room Luxury</h3>
+                                    <h3>Tầm nhìn hướng biển</h3>
                                 </div>
                             </div>
                         </div>
@@ -124,12 +113,12 @@
                 <div class="col-lg-6">
                     <div class="gallery-item large-item set-bg" data-setbg="/user_asset/img/gallery/gallery-2.jpg">
                         <div class="gi-text">
-                            <h3>Room Luxury</h3>
+                            <h3>Hồ bơi ngoài trời</h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Gallery Section End -->
+
 @endsection

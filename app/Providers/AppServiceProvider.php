@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Booking;
 use App\Models\NewsCategory;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Route;
@@ -34,12 +35,14 @@ class AppServiceProvider extends ServiceProvider
             ->take(5)
             ->get();
 
+        $newBookings = Booking::where('status', 'pending')
+                            ->orderBy('created_at', 'desc')
+                            ->take(5)
+                            ->get();
         $unreadCount = $unreadContacts->count();
         
-        $view->with([
-            'unreadContacts' => $unreadContacts,
-            'unreadCount' => $unreadCount,
-        ]);
+        $totalNewBookings = $newBookings->count();
+         $view->with(compact('unreadContacts', 'unreadCount', 'newBookings', 'totalNewBookings'));
     });
     }
 

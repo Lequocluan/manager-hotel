@@ -260,7 +260,7 @@ class BookingController extends Controller
             'notes' => $request->input('notes', ''),
             'status' => 'pending',
             'total_price' => $totalPrice,
-            'payment_method' => 'cod',
+            'payment_method' => $request->input('payment_method'),
         ]);
 
         $bookedRoomIds = BookingRoom::whereHas('booking', function ($query) use ($checkin, $checkout) {
@@ -301,7 +301,7 @@ class BookingController extends Controller
             'rooms',
             'services'
         ])->find($booking->id);
-        Mail::to($booking->email)->queue(new BookingConfirmation($booking));
+        // Mail::to($booking->email)->queue(new BookingConfirmation($booking));
 
         Session::forget(['booking.step1', 'booking.step2', 'booking.step3', 'booking.checkout']);
 

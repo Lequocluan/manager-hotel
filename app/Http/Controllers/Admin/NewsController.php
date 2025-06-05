@@ -16,18 +16,31 @@ class NewsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $title = 'Danh sách tin tức';
-        $news = News::orderByDesc('id')->with('newsCategories')->paginate(15);
-        return view('admin.news.list', compact('title', 'news'));
+public function index(Request $request)
+{
+    $query = News::with('newsCategories')->latest();
+
+    if ($request->filled('title')) {
+        $query->where('title', 'like', '%' . $request->title . '%');
     }
+
+    if ($request->filled('category_id')) {
+        $query->where('category_id', $request->category_id);
+    }
+
+    $news = $query->paginate(10)->appends($request->all());
+    $categories = NewsCategory::orderBy('name')->get();
+
+    return view('admin.news.list', compact('news', 'categories'));
+}
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        $this->authorize('them-tin-tuc');
         $title = 'Thêm tin tức';
         $categories = NewsCategory::where('status', 1)->orderByDesc('id')->get();
         return view('admin.news.add', compact('title', 'categories'));
@@ -38,6 +51,7 @@ class NewsController extends Controller
      */
     public function store(NewsRequest $request)
     {
+        $this->authorize('them-tin-tuc');
         try {
             $news = News::create([
                 'title' => $request->title,
@@ -81,6 +95,7 @@ class NewsController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('sua-tin-tuc');
         $title = 'Chỉnh sửa tin tức';
         $news = News::findOrFail($id);
         $categories = NewsCategory::where('status', 1)->orderByDesc('id')->get();
@@ -92,6 +107,7 @@ class NewsController extends Controller
      */
     public function update(NewsRequest $request, string $id)
     {
+        $this->authorize('sua-tin-tuc');
         $news = News::findOrFail($id);
         try {
             $news->update([
@@ -126,7 +142,14 @@ class NewsController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('xoa-tin-tuc');
         $news = News::find($id);
+        if (!$news) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tin tức không tồn tại'
+            ]);
+        }
         try {
             if ($news->image && file_exists(public_path($news->image))) {
                 unlink(public_path($news->image));

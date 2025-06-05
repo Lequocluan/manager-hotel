@@ -22,15 +22,8 @@
         <nav class="mainmenu mobile-menu">
             <ul>
                 <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
-                <li><a href="{{route('roomtypes.list')}}">Loại phòng</a></li>
-                <li><a href="{{ route('aboutUs') }}">Về chúng tôi</a></li>
-                <li><a href="./pages.html">Pages</a>
-                    <ul class="dropdown">
-                        <li><a href="./room-details.html">Room Details</a></li>
-                        <li><a href="#">Deluxe Room</a></li>
-                        <li><a href="#">Family Room</a></li>
-                        <li><a href="#">Premium Room</a></li>
-                    </ul>
+                <li>
+                    <a href="{{route('roomtypes.list')}}">Loại phòng</a>
                 </li>
                 <li>
                     <a href="{{ route('news.category', ['slug' => $allCategories[0]->slug ?? 'news']) }}">Tin tức</a>
@@ -42,6 +35,7 @@
                         @endforeach
                     </ul>
                 </li>
+                <li><a href="{{ route('about-us') }}">Về chúng tôi</a></li>
                 <li><a href="{{ route('contact')}}">Liên hệ</a></li>
             </ul>
         </nav>
@@ -97,7 +91,7 @@
                                 <ul>
                                     <li class="active"><a href="{{ route('home') }}">Trang chủ</a></li>
                                     <li><a href="{{route('roomtypes.list')}}">Loại phòng</a></li>
-                                    <li><a href="{{ route('aboutUs') }}">Về chúng tôi</a></li>
+                                    <li><a href="{{ route('about-us') }}">Về chúng tôi</a></li>
                                     <li>
                                         <a href="{{ route('news.category', ['slug' => $allCategories[0]->slug ?? 'news']) }}">Tin tức</a>
                                         <ul class="dropdown">

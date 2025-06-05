@@ -11,11 +11,15 @@ use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\User\BookingController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\NewsController as UserNewsController;
 use App\Models\Booking;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,13 +32,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::middleware(['auth:admin', 'role:admin|superadmin'])->prefix('admin')->group(function () {
+    Route::resource('roles', RoleController::class);
+    Route::resource('permissions', PermissionController::class);
+});
+
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('forgot-password.form');
     Route::post('forgot-password', [AuthController::class, 'handleForgotPassword'])->name('forgot-password.send');
     Route::get('reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('reset-password.form');
     Route::post('reset-password', [AuthController::class, 'handleResetPassword'])->name('reset-password');
 });
-// Đặt ngoài nhóm admin
+
 Route::get('admin/reset-password/{token}', [AuthController::class, 'showResetPasswordForm'])->name('password.reset');
 
 
@@ -73,12 +82,12 @@ Route::prefix('admin')->middleware('auth:admin')->group(function () {
     Route::get('/contacts', [ContactController::class, 'index'])->name('admin.contacts.index');
     Route::get('/contacts/{id}', [ContactController::class, 'show'])->name('admin.contacts.show');
     Route::post('/contacts/{id}/reply', [ContactController::class, 'reply'])->name('admin.contacts.reply');
-Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
-
+    Route::delete('/contact/{id}', [ContactController::class, 'destroy'])->name('contact.destroy');
 });
+
 Route::get('/', [HomeController::class, 'index']) -> name('home');
 
-Route::get('/about-us', [HomeController::class, 'aboutUs']) -> name('aboutUs');
+Route::get('/about-us', [HomeController::class, 'aboutUs']) -> name('about-us');
 Route::get('/contact', [HomeController::class, 'contact']) -> name('contact');
 Route::post('/contact/send', [HomeController::class, 'store'])->name('contact.send');
 
@@ -86,19 +95,15 @@ Route::get('/room-types', [HomeController::class, 'listRoomTypes']) -> name('roo
 Route::get('/room-types/{slug}', [HomeController::class, 'roomtypeDetail']) -> name('roomtype.detail');
 
 
-// Bước 1: Chọn ngày, số lượng phòng, người
 Route::get('/booking/start', [BookingController::class, 'start'])->name('booking.start');
 Route::post('/booking/step1', [BookingController::class, 'step1'])->name('booking.step1');
 
-// Bước 2: Chọn loại phòng
 Route::get('/booking/select-room', [BookingController::class, 'selectRoom'])->name('booking.selectRoom');
 Route::post('/booking/step2', [BookingController::class, 'step2'])->name('booking.step2');
 
-// Bước 3: Chọn dịch vụ
 Route::get('/booking/select-services', [BookingController::class, 'selectServices'])->name('booking.selectServices');
 Route::post('/booking/step3', [BookingController::class, 'step3'])->name('booking.step3');
 
-// Bước 4: Thanh toán
 Route::get('/booking/checkout', [BookingController::class, 'checkout'])->name('booking.checkout');
 Route::post('/booking/confirm', [BookingController::class, 'confirm'])->name('booking.confirm');
 Route::get('/booking/success', function () {

@@ -153,8 +153,8 @@ class AuthController extends Controller
         ]);
 
         Mail::to($request->email)->send(new AdminResetPasswordMail($url));
-
-        return back()->with('message', 'Liên kết đặt lại mật khẩu đã được gửi qua email.');
+        Session::flash('success', 'Gửi thông tin cập nhật mật khẩu thành công!');
+        return view('admin.auth.login');
     }
 
     public function showResetPasswordForm(Request $request, $token)
@@ -195,9 +195,9 @@ class AuthController extends Controller
         $admin->password = Hash::make($request->password);
         $admin->save();
 
-        // Xóa token sau khi dùng
+
         DB::table('password_reset_tokens')->where('email', $request->email)->delete();
 
-        return redirect()->route('login')->with('success', 'Đặt lại mật khẩu thành công, vui lòng đăng nhập.');
+        return view('admin.auth.login')->with('success', 'Đặt lại mật khẩu thành công, vui lòng đăng nhập.');
     }
 }

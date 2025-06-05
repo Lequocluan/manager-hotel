@@ -17,12 +17,14 @@ class Booking extends Model
         'status',
         'notes',
         'total_price',
+        'payment_status',
         'payment_method'
     ];
     protected $casts = [
         'check_in_date' => 'datetime',
         'check_out_date' => 'datetime',
         'total_price' => 'decimal:2',
+        'payment_method' => 'boolean',
     ];
     public function bookingServices()
     {

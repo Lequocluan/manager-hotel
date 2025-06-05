@@ -14,6 +14,7 @@ class ServiceController extends Controller
      */
     public function index()
     {
+        $this->authorize('xem-dich-vu');
         $title = "Danh sách dịch vụ";
         $services = Service::orderByDesc('id')->paginate(15);
         return view('admin.services.list', compact('title', 'services'));
@@ -24,6 +25,7 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        $this->authorize('them-dich-vu');
         $title = "Thêm dịch vụ";
         return view('admin.services.add', compact('title'));
     }
@@ -33,6 +35,7 @@ class ServiceController extends Controller
      */
     public function store(ServiceRequest $request)
     {
+        $this->authorize('them-dich-vu');
         Service::create([
             'name' => $request->name,
             'unit' => $request->unit,
@@ -57,6 +60,7 @@ class ServiceController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('sua-dich-vu');
         $title = "Chỉnh sửa dịch vụ";
         $service = Service::findOrFail($id);
         return view('admin.services.edit', compact('title', 'service'));
@@ -67,6 +71,7 @@ class ServiceController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $this->authorize('sua-dich-vu');
         $service = Service::findOrFail($id);
         $service->update([
             'name' => $request->name,
@@ -84,6 +89,7 @@ class ServiceController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('xoa-dich-vu');
         $service = Service::findOrFail($id);
         try {
             $service->delete();

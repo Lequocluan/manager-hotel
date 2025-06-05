@@ -10,15 +10,38 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    public function index()
-    {
-        $title ='Danh sách phản hồi của khách hàng.';
-        $contacts = Contact::latest()->get();
-        return view('admin.contacts.index', compact('title','contacts'));
+public function index(Request $request)
+{
+    $title = 'Danh sách các liên hệ';
+    $query = Contact::query();
+
+    if ($request->has('replied') && $request->filled('replied')) {
+        if ($request->replied === '1') {
+            $query->where('replied', true);
+        } elseif ($request->replied === '0') {
+            $query->where('replied', false);
+        }
     }
+
+    if ($request->filled('keyword')) {
+        $keyword = $request->keyword;
+        $query->where(function ($q) use ($keyword) {
+            $q->where('name', 'like', "%{$keyword}%")
+              ->orWhere('email', 'like', "%{$keyword}%")
+              ->orWhere('subject', 'like', "%{$keyword}%");
+        });
+    }
+
+    $contacts = $query->latest()->paginate(10);
+    
+    /** @var \Illuminate\Pagination\LengthAwarePaginator $contacts */
+    $contacts->withQueryString();
+    return view('admin.contacts.index', compact('title', 'contacts'));
+}
 
     public function show($id)
     {
+        $this->authorize('xem-lien-he');
         $contact = Contact::findOrFail($id);
         $contact->update(['seen' => true]);
         return view('admin.contacts.show', compact('contact'));
@@ -26,6 +49,7 @@ class ContactController extends Controller
 
     public function reply(Request $request, $id)
     {
+        $this->authorize('dap-lien-he');
         $request->validate([
             'reply_message' => 'required',
         ]);
@@ -40,6 +64,7 @@ class ContactController extends Controller
         return redirect()->route('admin.contacts.index')->with('success', 'Phản hồi đã được gửi thành công.');
     }
     public function destroy(string $id){
+        $this->authorize('xoa-lien-he');
         $contact = Contact::find($id);
         try{
             $contact ->delete();

@@ -77,7 +77,7 @@
                 </table>
             </div>
             @else
-            <p class="alert alert-danger">Chưa có loại phòng nào!</p>
+            <p class="alert alert-danger">Không có loại phòng nào!</p>
             @endif
         </div>
 

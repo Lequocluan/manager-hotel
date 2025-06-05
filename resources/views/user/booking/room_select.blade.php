@@ -4,7 +4,7 @@
 <div class="container py-5">
     <h3 class="mb-4 text-center fw-bold text-primary">Chọn loại phòng phù hợp</h3>
 
-    {{-- Hiển thị lỗi --}}
+
     @if ($errors->any())
         <div class="alert alert-danger shadow-sm rounded-3">
             <ul class="mb-0">
@@ -15,7 +15,7 @@
         </div>
     @endif
 
-    {{-- Hiển thị gợi ý chia phòng --}}
+    
     @if (session('suggestion'))
         <div class="alert alert-info shadow-sm rounded-3">
             <strong>Gợi ý chia phòng:</strong> {{ session('suggestion') }}

@@ -2,9 +2,8 @@
 @section('content')
 
 
-    <!-- Blog Details Hero Section Begin -->
 <section class="blog-details-hero set-bg" data-setbg="{{ $news->image }}">
-    <div class="overlay"></div> <!-- Thêm lớp phủ -->
+    <div class="overlay"></div> 
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1">
@@ -21,9 +20,6 @@
     </div>
 </section>
 
-    <!-- Blog Details Hero End -->
-
-    <!-- Blog Details Section Begin -->
     <section class="blog-details-section">
         <div class="container">
             <div class="row">
@@ -72,15 +68,12 @@
             </div>
         </div>
     </section>
-    <!-- Blog Details Section End -->
-
-    <!-- Recommend Blog Section Begin -->
     <section class="recommend-blog-section spad">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-title">
-                        <h2>Recommended</h2>
+                        <h2>Các bài viết khác</h2>
                     </div>
                 </div>
             </div>
@@ -104,7 +97,6 @@
 
         </div>
     </section>
-    <!-- Recommend Blog Section End -->
 
 @endsection
 

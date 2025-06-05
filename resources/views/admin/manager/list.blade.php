@@ -28,7 +28,7 @@
                     <th>Tên</th>
                     <th>Email</th>
                     <th>SĐT</th>
-                    <th>Giới tính</th>
+                    <th>Chức vụ</th>
                     <th>Xử lý</th>
                 </tr>
                 </thead>
@@ -46,15 +46,7 @@
                         <td>{{ $manager->name }}</td>
                         <td>{{ $manager->email }}</td>
                         <td>{{ $manager->phone ?? 'Chưa cập nhật' }}</td>
-                        <td>
-                            @if ($manager->gender == 1)
-                            Nam
-                            @elseif ($manager->gender == 2)
-                            Nữ
-                            @else
-                            Chưa cập nhật
-                            @endif
-                        </td>
+                        <td>{{ $manager->role ? $manager->role->name : 'Chưa có' }}</td>
                         <td>
                             <div class="d-flex align-items-center">
                                 <a href="{{ route('manager.edit', $manager->id) }}" class="btn btn-outline-primary btn-xs me-2" title="Edit"><i class="fas fa-edit" data-bs-toggle="tooltip" title="Chỉnh sửa nhân viên"></i></a>

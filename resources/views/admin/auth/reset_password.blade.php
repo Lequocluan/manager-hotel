@@ -38,7 +38,7 @@
             margin-bottom: 20px;
         }
         input {
-            width: 100%;
+            width: 420px;
             padding: 12px;
             margin: 10px 0;
             border-radius: 6px;
@@ -64,8 +64,8 @@
             color: #777;
         }
         input.is-invalid {
-    border-color: #e3342f; /* đỏ nổi bật */
-    background-color: #ffe6e6; /* nền đỏ nhạt */
+    border-color: #e3342f; 
+    background-color: #ffe6e6; 
 }
 
 .invalid-feedback {

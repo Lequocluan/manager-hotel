@@ -72,7 +72,7 @@
 
     <form method="POST" action="{{ route('admin.forgot-password.send') }}">
         @csrf
-        <input class="@error('email') is-invalid @enderror" type="email" name="email" placeholder="Nhập email quản trị viên">
+        <input class="@error('email') is-invalid @enderror" style="width:420px;" type="email" name="email" placeholder="Nhập email quản trị viên">
         @error('email')
             <div class="invalid-feedback">{{ $message }}</div>
         @enderror

@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <!-- Hero Section Begin -->
+
     <section class="hero-section">
         <div class="container">
             <div class="row">
@@ -10,22 +10,22 @@
                     <div class="hero-text">
                         <h1>Havana Hotel</h1>
                         <p style="font-size: 20px">Khách sạn Havana tự hào là điểm dừng chân lý tưởng cho du khách trong và ngoài nước khi đến với thành phố Nha Trang.</p>
-                        <a href="#" class="primary-btn">Discover Now</a>
+                        <a href="{{ route('about-us') }}" class="primary-btn">Khám phá ngay</a>
                     </div>
                 </div>
                 <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                     <div class="booking-form">
-                        <h3>Booking Your Hotel</h3>
+                        <h3>Bắt đầu đặt phòng</h3>
                         <form id="booking-form" action="{{ route('booking.step1') }}" method="POST">
                             @csrf
                             <div class="check-date">
-                                <label for="date-in">Check In:</label>
+                                <label for="date-in">Ngày đến:</label>
                                 <input type="text" class="date-input"id="date-in_"  readonly>
                                 <input type="hidden" id="date-in" name="checkin">
                                 <i class="icon_calendar"></i>
                             </div>
                             <div class="check-date">
-                                <label for="date-out">Check Out:</label>
+                                <label for="date-out">Ngày đi:</label>
                                 <input type="text" class="date-input" id="date-out_" readonly>
                                 <input type="hidden" id="date-out" name="checkout">
                                 <i class="icon_calendar"></i>
@@ -36,7 +36,7 @@
                                     @for ($i = 1; $i <= 5; $i++)
                                         <option value="{{ $i }}">{{ $i }} người</option>
                                     @endfor
-                                    <option value="other">Khác...</option>
+                                    <option value="other">Chọn số người</option>
                                 </select>
                             </div>
 
@@ -46,11 +46,11 @@
                                     @for ($i = 0; $i <= 5; $i++)
                                         <option value="{{ $i }}">{{ $i }} trẻ em</option>
                                     @endfor
-                                    <option value="other">Khác...</option>
+                                    <option value="other">Chọn số người</option>
                                 </select>
                             </div>
 
-                            <button type="submit">Check Availability</button>
+                            <button type="submit">Đặt phòng</button>
                         </form>
                     </div>
                 </div>
@@ -62,99 +62,95 @@
             <div class="hs-item set-bg" data-setbg="/user_asset/img/hero/hero-13.jpg"></div>
         </div>
     </section>
-    <!-- Hero Section End -->
-
-    <!-- About Us Section Begin -->
-    <section class="aboutus-section spad" style="min-height: 100vh;">
-    <div class="container h-100">
-        <div class="row h-100">
-            <div class="col-lg-6 d-flex flex-column justify-content-center">
-                <div class="about-text">
-                    <div class="section-title">
-                        <span>About Us</span>
-                        <h2>{{ $aboutUs->title }}</h2>
-                    </div>
-                    <p class="f-para">{!! $aboutUs->content !!}</p>
-                    <a href="{{ route('news.blog-detail', ['slugCategory' => $aboutUs->newsCategories->slug, 'slugBlog' => $aboutUs->slug]) }}" class="primary-btn about-btn">Read More</a>
-                </div>
-            </div>
-            <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                <div style="max-width: 100%;">
-                    <img src="{{ $aboutUs->image }}" alt="img-about-us" class="img-fluid">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- About Us Section End -->
-
-    <!-- Services Section End -->
-    <section class="services-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-title">
-                        <span>What We Do</span>
-                        <h2>Discover Our Services</h2>
+    
+    <section class="aboutus-section spad">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-6 d-flex flex-column justify-content-center">
+                    <div class="about-text">
+                        <div class="section-title">
+                            <span>Về chúng tôi</span>
+                            <h2>Havana Hotel khách sạn 5 sao giữa trung tâm thành phố.</h2>
+                        </div>
+                        <p class="f-para">Khách sạn Havana Nha Trang  cung cấp 1060 phòng lưu trú hướng biển, cùng hệ thống trang thiết bị, tiện ích hiện đại theo tiêu chuẩn 5 sao quốc tế. Là sự kết hợp khéo léo giữa kiến trúc nội thất theo phong cách châu Âu trên nền những vật liệu tự nhiên mang tính thẩm mỹ cao, làm toát lên vẻ sang trọng, để lại cho bạn một ấn tượng khó phai.</p>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-036-parking"></i>
-                        <h4>Travel Plan</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-033-dinner"></i>
-                        <h4>Catering Service</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-026-bed"></i>
-                        <h4>Babysitting</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-024-towel"></i>
-                        <h4>Laundry</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-044-clock-1"></i>
-                        <h4>Hire Driver</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="service-item">
-                        <i class="flaticon-012-cocktail"></i>
-                        <h4>Bar & Drink</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore magna.</p>
+                <div class="col-lg-6 d-flex justify-content-center align-items-center">
+                    <div style="max-width: 100%;">
+                        <img src="{{ asset('/user_asset/img/room/room-1.jpg') }}" alt="img-about-us" class="img-fluid">
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- Services Section End -->
 
-    <!-- Home Room Section Begin -->
+<!-- Services Section Start -->
+<section class="services-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <span>Dịch vụ của chúng tôi</span>
+                    <h2>Khám phá tiện ích tại Havana</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!-- 1. Nhà hàng cao cấp -->
+            <div class="col-lg-4 col-sm-6">
+                <div class="service-item">
+                    <i class="flaticon-033-dinner"></i>
+                    <h4>Nhà hàng cao cấp</h4>
+                    <p>Thưởng thức ẩm thực phong phú từ Á đến Âu trong không gian sang trọng, hiện đại ngay tại khách sạn.</p>
+                </div>
+            </div>
+            <!-- 2. Bar & Lounge -->
+            <div class="col-lg-4 col-sm-6">
+                <div class="service-item">
+                    <i class="flaticon-012-cocktail"></i>
+                    <h4>Bar & Lounge</h4>
+                    <p>Không gian thư giãn với các loại cocktail đặc sắc, rượu vang cao cấp và âm nhạc nhẹ nhàng.</p>
+                </div>
+            </div>
+            <!-- 3. Hồ bơi ngoài trời -->
+            <div class="col-lg-4 col-sm-6">
+                <div class="service-item">
+                    <i class="flaticon-027-relax"></i>
+                    <h4>Hồ bơi</h4>
+                    <p>Hồ bơi ngoài trời với tầm nhìn ra biển, lý tưởng để thư giãn và tận hưởng ánh nắng Nha Trang.</p>
+                </div>
+            </div>
+            <!-- 4. Spa & Massage -->
+            <div class="col-lg-4 col-sm-6">
+                <div class="service-item">
+                    <i class="flaticon-026-bed"></i>
+                    <h4>Spa & Massage</h4>
+                    <p>Liệu trình chăm sóc cơ thể chuyên nghiệp giúp quý khách phục hồi năng lượng và cân bằng tinh thần.</p>
+                </div>
+            </div>
+            <!-- 5. Giặt ủi -->
+            <div class="col-lg-4 col-sm-6">
+                <div class="service-item">
+                    <i class="flaticon-024-towel"></i>
+                    <h4>Giặt ủi</h4>
+                    <p>Dịch vụ giặt ủi nhanh chóng, sạch sẽ, đảm bảo trang phục luôn như mới trong suốt kỳ nghỉ.</p>
+                </div>
+            </div>
+            <!-- 6. Đưa đón sân bay -->
+            <div class="col-lg-4 col-sm-6">
+                <div class="service-item">
+                    <i class="flaticon-044-clock-1"></i>
+                    <h4>Đưa đón sân bay</h4>
+                    <p>Xe đưa đón hiện đại, tài xế thân thiện, phục vụ quý khách đến/đi sân bay một cách tiện lợi.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services Section End -->
+
+
+    
     <section class="hp-room-section">
         <div class="container-fluid">
             <div class="hp-room-items">
@@ -164,9 +160,9 @@
                             <div class="hp-room-item set-bg" data-setbg="{{ $roomType->image?? '/user_asset/img/room/room-1.jpg' }}">
                                 <div class="hr-text">
                                     <h3>{{ $roomType->name }}</h3>
-                                    <h2>{{ number_format($roomType->price) }}VND<span> / night</span></h2>
+                                    <h2>{{ number_format($roomType->price) }}VND<span> / đêm</span></h2>
                                     <p>{{ $roomType->overview }}</p>
-                                    <a href="{{ route('roomtype.detail', ['slug' => $roomType->slug]) }}" class="primary-btn">Book Now</a>
+                                    <a href="{{ route('roomtype.detail', ['slug' => $roomType->slug]) }}" class="primary-btn">Xem chi tiết</a>
                                 </div>
                             </div>
                         </div>
@@ -175,9 +171,7 @@
             </div>
         </div>
     </section>
-    <!-- Home Room Section End -->
-
-    <!-- Testimonial Section Begin -->
+    
     <section class="testimonial-section spad">
         <div class="container">
             <div class="row">
@@ -223,9 +217,7 @@
             </div>
         </div>
     </section>
-    <!-- Testimonial Section End -->
-
-    <!-- Blog Section Begin -->
+    
     <section class="blog-section spad">
         <div class="container">
             <div class="row">
@@ -252,7 +244,6 @@
             </div>
         </div>
     </section>
-    <!-- Blog Section End -->
 
 @endsection
 @section('js')

@@ -2,13 +2,23 @@
 
 @section('content')
 
-    <section class="rooms-section spad">
-        <div class="container">
-            <div class="row">
-                @foreach ($roomTypes as $roomType)
-                    <div class="col-lg-4 col-md-6">
+<section class="rooms-section spad">
+    <div class="container">
+        @php
+            $count = $roomTypes->count();
+        @endphp
+
+        @foreach ($roomTypes->chunk(3) as $chunk)
+            @php
+                $isLastRow = $loop->last;
+                $isFullRow = count($chunk) === 3;
+            @endphp
+
+            <div class="row {{ !$isFullRow && $isLastRow ? 'd-flex justify-content-center' : '' }}">
+                @foreach ($chunk as $roomType)
+                    <div class="col-lg-4 col-md-6 mb-4">
                         <div class="room-item">
-                                <img src="{{ asset($roomType->image) }}" class="img-fluid" alt="Ảnh loại phòng">
+                            <img src="{{ asset($roomType->image) }}" class="img-fluid" alt="Ảnh loại phòng">
                             <div class="ri-text">
                                 <h5 class="text-capitalize">{{ $roomType->name }}</h5>
                                 <h3>{{ number_format($roomType->price) }}VNĐ<span>/đêm</span></h3>
@@ -32,15 +42,17 @@
                             </div>
                         </div>
                     </div>
-                    
                 @endforeach
-                <div class="col-lg-12">
-                    <div class="room-pagination">
-                        {{ $roomTypes->links() }}
-                    </div>
-                </div>
+            </div>
+        @endforeach
+
+        <div class="col-lg-12">
+            <div class="room-pagination mt-4">
+                {{ $roomTypes->links() }}
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
 @endsection

@@ -2,7 +2,6 @@
 
 @section('content')
 
-{{-- PHẦN ẢNH BANNER + BREADCRUMB + TÊN PHÒNG --}}
 <div class="room-header" style="position: relative;">
     <img src="{{ asset($roomType->image) }}" class="img-fluid w-100" style="height: 400px; object-fit: cover;" alt="Ảnh loại phòng">
     
@@ -15,21 +14,16 @@
                 <li>/</li>
                 <li class="text-upp">{{ $roomType->name }}</li>
             </ul>
-            {{-- Tên loại phòng --}}
             <h2 class="mt-2">{{ $roomType->name }}</h2>
         </div>
     </div>
 </div>
-
-{{-- PHẦN CHI TIẾT --}}
 <section class="room-details-section spad container py-5">
     <div class="row">
         <div class="col-md-6">
-            {{-- Slider ảnh phòng (sau này có thể thêm nhiều ảnh) --}}
             <div class="rd-pic">
                 @if($roomType->images->count() > 0)
                 <div id="roomTypeCarousel" class="carousel slide" data-bs-ride="carousel">
-                    {{-- Indicators --}}
                     <div class="carousel-indicators">
                         @foreach($roomType->images as $key => $image)
                             <button type="button" data-bs-target="#roomTypeCarousel" data-bs-slide-to="{{ $key }}"
@@ -38,7 +32,6 @@
                         @endforeach
                     </div>
 
-                    {{-- Slides --}}
                     <div class="carousel-inner">
                         @foreach($roomType->images as $key => $image)
                             <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
@@ -48,7 +41,6 @@
                         @endforeach
                     </div>
 
-                    {{-- Controls --}}
                     <button class="carousel-control-prev" type="button" data-bs-target="#roomTypeCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon"></span>
                     </button>
@@ -78,9 +70,9 @@
     </div>
 </section>
 
-{{-- PHẦN các loại phòng khác --}}
+
 @php
-    $roomChunks = $ortherRoomTypes->chunk(2); // KHÔNG cần nhân đôi nếu lẻ
+    $roomChunks = $ortherRoomTypes->chunk(2); 
 @endphp
 
 <section id="otherRoomCarousel" class="carousel slide mb-5" data-bs-ride="carousel" data-bs-interval="3000">
@@ -97,18 +89,12 @@
                                         <h5 class="mb-2">{{ $roomType->name }}</h5>
                                         <h6 class="text-danger mb-2">{{ number_format($roomType->price) }} VND <span class="text-muted">/ đêm</span></h6>
                                         <p class="small">{{ $roomType->overview }}</p>
-                                        <tr>
-                                            <td class="r-o">Size:</td>
-                                            <td>{{ $roomType->size }} m<sup>2</sup></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Bed:</td>
-                                            <td>{{ $roomType->bed_type }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="r-o">Số người tối đa:</td>
-                                            <td>{{ $roomType->max_adults }} người lớn, {{ $roomType->max_children }} trẻ em</td>
-                                        </tr>
+                                        <p class="mb-0">
+                                            <strong>Diện tích:</strong> {{ $roomType->size }} m<sup>2</sup>
+                                        </p>
+                                        <p class="mb-0">
+                                            <strong>Số người tối đa:</strong>{{ $roomType->max_adults }} người lớn, {{ $roomType->max_children }} trẻ em
+                                        </p>                      
                                     </div>
                                 </div>
                             </a>
@@ -119,7 +105,7 @@
         @endforeach
     </div>
 
-    <!-- Controls -->
+
     <button class="carousel-control-prev" type="button" data-bs-target="#otherRoomCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
     </button>
@@ -127,7 +113,7 @@
         <span class="carousel-control-next-icon"></span>
     </button>
 
-    <!-- Indicators -->
+
     <div class="carousel-indicators mt-3">
         @foreach ($roomChunks as $chunkIndex => $chunk)
             <button type="button" data-bs-target="#otherRoomCarousel" data-bs-slide-to="{{ $chunkIndex }}"

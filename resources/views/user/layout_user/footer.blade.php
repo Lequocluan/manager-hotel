@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-lg-3 offset-lg-1">
                         <div class="ft-contact">
-                            <h6>Contact Us</h6>
+                            <h6>Liên hệ với chúng tôi</h6>
                             <ul>
                                 <li>(+84) 948338800</li>
                                 <li> info@havanahotel.vn</li>
@@ -64,57 +64,10 @@
                         </ul>
                     </div>
                     <div class="col-lg-5">
-                        <div class="co-text"><p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> Copyright by <a href="mailto:quocluan15102003@gmail.com" style="color: inherit;">Lê Quốc Luân</a></p></div>
+                        <div class="co-text"><p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> by <a href="mailto:quocluan15102003@gmail.com" style="color: inherit;">Lê Quốc Luân</a></p></div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="csssctop">
-            <a href="/"><i class="fa fa-angle-up"></i></a>
-        </div>
     </footer>
 
-    @section('css')
-    <style>
-        .csssctop {
-    position: fixed !important;
-    bottom: 20px !important;
-    right: 20px !important;
-    z-index: 999 !important;
-    background-color: #333 !important;
-    color: #fff !important;
-    padding: 10px 12px !important;
-    border-radius: 50% !important;
-    text-align: center !important;
-    display: none; /* Ẩn ban đầu, hiện khi cuộn xuống */
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-
-.csssctop:hover {
-    background-color: #555 important;
-}
-
-    </style>
-    @endsection
-
-    @section('js')
-    <script>
-    window.addEventListener('scroll', function () {
-    const scrollBtn = document.querySelector('.csssctop');
-    if (window.scrollY > 100) {
-        scrollBtn.style.display = 'block';
-    } else {
-        scrollBtn.style.display = 'none';
-    }
-});
-
-document.querySelector('.csssctop').addEventListener('click', function (e) {
-    e.preventDefault();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-</script>
-
-    @endsection

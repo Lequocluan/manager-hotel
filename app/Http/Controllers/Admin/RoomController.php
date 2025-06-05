@@ -6,6 +6,7 @@ use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\RoomRequest;
+use App\Models\RoomType;
 use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
@@ -13,18 +14,31 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $title = 'Danh sách phòng';
-        $rooms =Room::orderByDesc('id')->with('roomType')->paginate(15);
-        return view('admin.rooms.list', compact('title', 'rooms'));
+public function index(Request $request)
+{
+    $title = 'Danh sách các phòng';
+    $query = Room::with('roomType')->latest();
+
+    if ($request->filled('name')) {
+        $query->where('name', 'like', '%' . $request->name . '%');
     }
+
+    if ($request->filled('room_type_id')) {
+        $query->where('room_type_id', $request->room_type_id);
+    }
+
+    $rooms = $query->paginate(10)->appends($request->all());
+    $roomTypes = RoomType::orderBy('name')->get();
+
+    return view('admin.rooms.list', compact('title','rooms', 'roomTypes'));
+}
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
+        $this->authorize('them-phong');
         $title = 'Thêm phòng';
         $roomTypes = \App\Models\RoomType::all();
         return view('admin.rooms.add', compact('title', 'roomTypes'));
@@ -36,6 +50,7 @@ class RoomController extends Controller
      */
     public function store(RoomRequest $request)
     {
+        $this->authorize('them-phong');
         Room::create([
             'name' => $request->name,
             'room_type_id' => $request->room_type_id,
@@ -60,6 +75,7 @@ class RoomController extends Controller
      */
     public function edit(Room $room)
     {
+        $this->authorize('sua-phong');
         $title = 'Chỉnh sửa phòng';
         $roomTypes = \App\Models\RoomType::all();
         return view('admin.rooms.edit', compact('title', 'room', 'roomTypes'));
@@ -70,6 +86,7 @@ class RoomController extends Controller
      */
     public function update(RoomRequest $request, Room $room)
     {
+        $this->authorize('sua-phong');
         $room->update([
             'name' => $request->name,
             'room_type_id' => $request->room_type_id,
@@ -86,6 +103,7 @@ class RoomController extends Controller
      */
     public function destroy(Room $room)
     {
+        $this->authorize('xoa-phong');
         try {
             $room->delete();
             return response()->json([

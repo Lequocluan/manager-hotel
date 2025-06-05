@@ -1,9 +1,5 @@
 @extends('admin.layout_admin.main')
 
-@section('css')
-    <link rel="stylesheet" href="{{ asset('admin-assets/css/custom.css') }}">
-@endsection
-
 @section('content')
     <div class="container-fluid">
         <div class="row justify-content-center mt-4">

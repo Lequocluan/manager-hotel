@@ -18,6 +18,7 @@ class RoomTypeController extends Controller
      */
     public function index()
     {
+        $this->authorize('xem-loai-phong');
         $title = 'Danh sách loại phòng';
         $roomTypes = RoomType::orderByDesc('id')->paginate(15);
         return view('admin.room_types.list', compact('title', 'roomTypes'));
@@ -28,6 +29,7 @@ class RoomTypeController extends Controller
      */
     public function create()
     {
+        $this->authorize('them-loai-phong');
         $title = 'Thêm loại phòng';
         $roomType = new RoomType();
         return view('admin.room_types.add', compact('title', 'roomType'));
@@ -65,6 +67,7 @@ class RoomTypeController extends Controller
      */
     public function store(RoomTypeRequest $request)
     {
+        $this->authorize('them-loai-phong');
         $imagePath = null;
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -76,7 +79,11 @@ class RoomTypeController extends Controller
             $file->move($destination, $filename); 
             $imagePath = 'room_types/' . $filename; 
         }
-
+        if (!$request->input('uploaded_images')) {
+            return redirect()->back()
+                ->withInput()
+                ->withErrors(['uploaded_images' => 'Bạn phải tải lên ít nhất một ảnh chi tiết.']);
+        }
         $roomType = RoomType::create([
             'name' => $request->name,
             'slug' => Helper::createSlug($request->name),
@@ -134,6 +141,7 @@ class RoomTypeController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('sua-loai-phong');
         $title = 'Chỉnh sửa loại phòng';
         $roomType = RoomType::find($id);
         if (!$roomType) {
@@ -156,11 +164,10 @@ class RoomTypeController extends Controller
         return response()->json(['message' => 'Đã xóa ảnh']);
     }
 
-    /**
-     * Cập nhật loại phòng
-     */
+    
     public function update(RoomTypeRequest $request, string $id)
     {
+        $this->authorize('them-loai-phong');
         $roomType = RoomType::find($id);
         if (!$roomType) {
             abort(404);
@@ -241,6 +248,7 @@ class RoomTypeController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('xoa-loai-phong');
         $roomType = RoomType::find($id);
         if (!$roomType) {
             abort('404');

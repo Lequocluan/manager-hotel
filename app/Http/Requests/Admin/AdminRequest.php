@@ -28,6 +28,7 @@ class AdminRequest extends FormRequest
                 ? "required|email|unique:admins,email,$adminId"
                 : 'required|email|unique:admins,email',
             'password' => 'nullable|min:5|confirmed',
+            'role_id' => 'required|exists:roles,id',
             'phone' => ['nullable', 'unique:admins,phone,' .  $adminId, 'regex:/^(0|\+84)(3[2-9]|5[2689]|7[0-9]|8[1-9]|9[0-9])[0-9]{7}$/'],
             'address' => 'nullable|string',
             'gender' => 'nullable|in:1,2'

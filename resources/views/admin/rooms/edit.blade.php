@@ -55,7 +55,7 @@
                     <div class="col-md-6">
                         <label for="description" class="form-label fw-bold">Mô tả</label>
                         <textarea name="description" class="form-control @error('description') is-invalid @enderror"
-                                rows="3" placeholder="Nhập mô tả về phòng...">{{ old('description', $room->description) }}</textarea>
+                                rows="1" placeholder="Nhập mô tả về phòng...">{{ old('description', $room->description) }}</textarea>
                         @error('description')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

@@ -8,10 +8,10 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <h2>Blog</h2>
+                        <h2>Tin tức</h2>
                         <div class="bt-option">
                             <a href="{{ route('home') }}">Home</a>
-                            <span>Blog Grid</span>
+                            <span>Trang tin tức</span>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                                     <span class="b-tag">{{ $blog->newsCategories->name }}</span>
                                     <h4>
                                         <a href="{{ route('news.blog-detail', ['slugCategory' => $blog->newsCategories->slug, 'slugBlog' => $blog->slug]) }}">
-                                            {{ $blog->title }}
+                                            <div class="text-truncate">{{ $blog->title }}</div>
                                         </a>
                                     </h4>
                                     <div class="b-time"><i class="icon_clock_alt"></i> {{ $blog->created_at->format('d M, Y') }}</div>

@@ -35,7 +35,7 @@ class ResetPasswordRequest extends FormRequest
             'email.exists' => 'Email không tồn tại trong hệ thống',
             'password.required' => 'Mật khẩu không được để trống',
             'password.min' => 'Mật khẩu ít nhất 8 ký tự',
-            'password.confirmed' => 'Xác nhận mật khẩu không khớp',
+            'password_confirmation.confirmed' => 'Xác nhận mật khẩu không khớp',
         ];
     }
 }

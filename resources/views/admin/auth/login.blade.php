@@ -83,8 +83,8 @@
         }
 
 .invalid-feedback {
-    color: #c1c939; /* màu đỏ */
-    font-size: 0.875rem; /* nhỏ hơn text */
+    color: #c1c939; 
+    font-size: 0.875rem; 
     margin-top: 0.25rem;
     display: block; 
     font-style: italic;

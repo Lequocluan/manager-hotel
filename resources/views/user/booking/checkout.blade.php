@@ -84,13 +84,13 @@
             </div>
             <div class="row card-body">
                 <div class="col-md-6 form-check mb-2">
-                    <input class="form-check-input" type="radio" name="payment_method" id="pay_hotel" value="pay_hotel" checked>
+                    <input class="form-check-input" type="radio" name="payment_method" id="pay_hotel" value="0" checked>
                     <label class="form-check-label" for="pay_hotel">
                         Thanh toán tại khách sạn
                     </label>
                 </div>
                 <div class="col-md-6 form-check">
-                    <input class="form-check-input" type="radio" name="payment_method" id="online_payment" value="online_payment">
+                    <input class="form-check-input" type="radio" name="payment_method" id="online_payment" value="1">
                     <label class="form-check-label" for="online_payment">
                         Thanh toán online (VNPAY, Momo)
                     </label>

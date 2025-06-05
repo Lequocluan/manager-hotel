@@ -13,7 +13,6 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
 
-                {{-- Booking Info --}}
                 <div class="card shadow-lg mb-4">
                     <div class="card-header bg-dark text-white fw-semibold text-center">
                         Mã đặt phòng: #{{ str_pad($booking->id, 6, '0', STR_PAD_LEFT) }}
@@ -41,7 +40,6 @@
                     </div>
                 </div>
 
-                {{-- Room Info --}}
                 <div class="card shadow-lg mb-4">
                     <div class="card-header bg-primary text-white fw-semibold">
                         Thông tin phòng
@@ -83,44 +81,49 @@
                     </div>
                 @endif
 
-                {{-- Payment Info --}}
                 <div class="card shadow-lg mb-4">
                     <div class="card-header bg-success text-white fw-semibold">
                         Thanh toán
                     </div>
                     <div class="card-body">
                         <h4 class="text-success">{{ number_format($booking->total_price, 0, ',', '.') }} VNĐ</h4>
-                        <p><strong>Phương thức:</strong> {{ strtoupper($booking->payment_method) }}</p>
-                        @if ($booking->payment_method === 'cod')
-                            <p class="text-warning">Bạn sẽ thanh toán khi nhận phòng.</p>
-                        @endif
-                            
-                        <p><strong>Trạng thái:</strong> 
-                            <span class="badge bg-warning text-dark">
-                                @if ($booking->status === "pending") 
-                                    Đang xử lý
-                                @endif
-                            </span>
+                        <p><strong>Phương thức:</strong>
+                            {{ $booking->payment_method == 0 ? 'Thanh toán tại khách sạn' : 'Thanh toán online' }}
                         </p>
+                        @if ($booking->payment_method == 0)
+                            <p class="text-warning">Bạn sẽ thanh toán khi nhận phòng.</p>
+                        @else
+                            <p class="text-success">Bạn đã thanh toán online.</p>
+                        @endif
+
+                        <p><strong>Trạng thái:</strong> 
+                            @if ($booking->status === "pending") 
+                                <span class="badge bg-warning text-dark">Đang xử lý</span>
+                            @elseif ($booking->status === "confirmed")
+                                <span class="badge bg-success">Đã xác nhận</span>
+                            @elseif ($booking->status === "cancelled")
+                                <span class="badge bg-danger">Đã hủy</span>
+                            @endif
+                        </p>
+
                         @if ($booking->status === 'pending')
-                            <p class="text-danger">Lưu ý: Đặt phòng của bạn đang chờ xác nhận. Vui lòng kiểm tra email để biết thêm chi tiết.</p>
+                            @if ($booking->payment_method == 1)
+                                <p class="text-info">Bạn đã thanh toán online. Đơn đặt phòng của bạn đang chờ xác nhận.</p>
+                            @else
+                                <p class="text-danger">Lưu ý: Đặt phòng của bạn đang chờ xác nhận. Vui lòng kiểm tra email để biết thêm chi tiết.</p>
+                            @endif
                         @elseif ($booking->status === 'confirmed')
                             <p class="text-success">Đặt phòng của bạn đã được xác nhận. Chúng tôi rất mong được đón tiếp bạn!</p>
-                        @elseif ($booking->status === 'cancelled')
-                            <p class="text-danger">Đặt phòng của bạn đã bị hủy. Nếu có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi.</p>
-                        @elseif ($booking->status === 'completed')
-                            <p class="text-success">Cảm ơn bạn đã ở lại với chúng tôi! Chúng tôi hy vọng bạn đã có một kỳ nghỉ tuyệt vời.</p>
                         @endif
+
                     </div>
                 </div>
 
-                {{-- Action Buttons --}}
                 <div class="text-center mt-4">
                     <a href="{{ route('home') }}" class="btn btn-outline-primary btn-lg me-3">
                         <i class="bi bi-house-door-fill me-1"></i> Về trang chủ
                     </a>
-                    {{-- <a href="{{ route('booking.invoice.pdf', $booking->id) }}" class="btn btn-success btn-lg"> --}}
-                    <a href="#" class="btn btn-success btn-lg">
+                    <a href="{{ route('booked-rooms.exportPdf', $booking->id) }}" class="btn btn-success btn-lg">
                         <i class="bi bi-file-earmark-arrow-down-fill me-1"></i> Tải hóa đơn (PDF)
                     </a>
                 </div>

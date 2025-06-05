@@ -19,9 +19,14 @@ return new class extends Migration
             $table->date('check_in_date');
             $table->date('check_out_date');
             $table->string('notes')->nullable();
-            $table->string('status')->default('pending'); // pending, confirmed, cancelled
+            
+            $table->enum('status', ['pending', 'confirmed', 'cancelled', 'cancelled'])->default('pending');
+
+            $table->boolean('payment_status')->default(0);
+
+            $table->boolean('payment_method')->default(0);
+
             $table->decimal('total_price', 10, 2);
-            $table->string('payment_method')->default('credit_card'); // credit_card, paypal, bank_transfer
             $table->timestamps();
         });
     }
@@ -33,5 +38,4 @@ return new class extends Migration
     {
         Schema::dropIfExists('bookings');
     }
-
 };

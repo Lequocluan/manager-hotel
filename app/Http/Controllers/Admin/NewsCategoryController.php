@@ -16,6 +16,7 @@ class NewsCategoryController extends Controller
      */
     public function index()
     {
+        $this->authorize('xem-danh-muc-tin-tuc');
         $title = 'Danh sách loại tin tức';
         $categories = NewsCategory::orderByDesc('id')->paginate(15);
         return view('admin.news_category.list', compact('title', 'categories'));
@@ -26,6 +27,7 @@ class NewsCategoryController extends Controller
      */
     public function create()
     {
+        $this->authorize('them-danh-muc-tin-tuc');
         $title = 'Thêm loại tin tức';
         return view('admin.news_category.add', compact('title'));
     }
@@ -35,6 +37,7 @@ class NewsCategoryController extends Controller
      */
     public function store(NewsCategoryRequest $request)
     {
+        $this->authorize('them-danh-muc-tin-tuc');
         try {
             NewsCategory::create([
                 'name' => $request->name,
@@ -62,6 +65,7 @@ class NewsCategoryController extends Controller
      */
     public function edit(string $id)
     {
+        $this->authorize('sua-danh-muc-tin-tuc');
         $title = 'Chỉnh sửa loại tin tức';
         $category = NewsCategory::findOrFail($id);
         return view('admin.news_category.edit', compact('title', 'category'));
@@ -72,6 +76,7 @@ class NewsCategoryController extends Controller
      */
     public function update(NewsCategoryRequest $request, string $id)
     {
+        $this->authorize('sua-danh-muc-tin-tuc');
         $newsCategory = NewsCategory::findOrFail($id);
         try {
             $newsCategory->update([
@@ -92,6 +97,7 @@ class NewsCategoryController extends Controller
      */
     public function destroy(string $id)
     {
+        $this->authorize('xoa-danh-muc-tin-tuc');
         $newsCategory = NewsCategory::findOrFail($id);
         try{
             $newsCategory->delete();

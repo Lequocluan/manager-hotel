@@ -13,13 +13,33 @@
 
     <div class="col-lg-12">
         <div class="card mb-4">
-            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">
-                    <a href="{{ route('news.create') }}" class="btn btn-secondary">
-                        <i class="fas fa-plus me-1"></i> Thêm bài viết
-                    </a>
-                </h6>
-            </div>
+            <form method="GET" action="{{ route('news.index') }}" class="row g-3 px-3 pt-3">
+                <div class="col-md">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                        <a href="{{ route('news.create') }}" class="btn btn-secondary">
+                            <i class="fas fa-plus me-1"></i> Thêm
+                        </a>
+                    </h6>
+                </div>
+                <div class="col-md">
+                    <input type="text" name="title" class="form-control" placeholder="Tìm theo tiêu đề bài viết..." value="{{ request('title') }}">
+                </div>
+
+                <div class="col-md">
+                    <select name="category_id" class="form-control tag-select">
+                        <option value="">-- Tất cả danh mục --</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" {{ request('category_id') == $category->id ? 'selected' : '' }}>
+                                {{ $category->name }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                    <div class="col-md d-flex flex-wrap gap-2 justify-content-start">
+                        <button type="submit" class="btn btn-primary flex-fill">Lọc</button>
+                        <a href="{{ route('news.index') }}" class="btn btn-secondary flex-fill">Reset</a>
+                    </div>
+            </form>
 
             @if ($news->count() > 0)
             <div class="table-responsive p-3">
@@ -75,7 +95,7 @@
                 </table>
             </div>
             @else
-                <p class="alert alert-danger text-center">Chưa có bài viết nào!</p>
+                <p class="alert alert-danger text-center">Không có bài viết nào!</p>
             @endif
         </div>
 
@@ -86,8 +106,21 @@
 </div>
 
 @endsection
+@section('css')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('admin_asset/css/custom/custom.css') }}">
+@endsection
 
 @section('js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('admin_asset/js/custom/delete.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.tag-select').select2({
+            placeholder: "-- Chọn danh mục --",
+            allowClear: true
+        });
+    });
+</script>
 @endsection

@@ -75,7 +75,7 @@
 </head>
 <body>
     <div class="container" style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: auto; padding: 20px;">
-        <h2>🎉 Xin chào {{ $booking->name }},</h2>
+        <h2>Xin chào {{ $booking->name }},</h2>
 
         <p>Cảm ơn bạn đã đặt phòng tại <strong>Khách sạn Havana</strong>! Chúng tôi rất hân hạnh được phục vụ bạn.</p>
         <p>Chúng tôi đã nhận được yêu cầu đặt phòng của bạn với các thông tin sau:</p>

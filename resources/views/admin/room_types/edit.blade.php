@@ -106,7 +106,10 @@
                     <div class="col-md-6 mb-3">
                         <label for="imageUpload" class="form-label fw-bold">Hình ảnh mô tả</label>
                         <input type="file" id="imageUpload" multiple >
-                        <input type="hidden" name="uploaded_images" id="uploadedImages" >
+                        <input type="hidden" name="uploaded_images" id="uploadedImages" class="@error('uploaded_images') is-invalid @enderror">
+                        @error('uploaded_images')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <div class="col-md-6 mb-3">
